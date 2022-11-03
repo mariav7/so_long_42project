@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 16:08:43 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/02 12:24:48 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/03 11:28:13 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 		@ar rc $(NAME) $(OBJ)
-		@echo "$(YELLOW)[COMPILING]$(WHITE) libft"
+		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) libft"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)

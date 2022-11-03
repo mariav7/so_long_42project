@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/02 18:12:07 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/03 11:43:20 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,71 +17,73 @@ FLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
-HEADERS_PATHS 	= ./includes/ $(LIB_PATH)/includes/ $(MLX_PATH)
-HEADERS			= $(addprefix -I,$(HEADERS_PATHS))
+HEADERS_PATHS = ./includes/ $(LIB_PATH)/includes/ $(MLX_HEADER)
+HEADERS				= $(addprefix -I,$(HEADERS_PATHS))
 
 # LIBFT
 LIB_NAME 	= ft
 LIB_PATH	= ./libft/
-LIB			= -L$(LIB_PATH) -l$(LIB_NAME)
+LIB				= -L$(LIB_PATH) -l$(LIB_NAME)
 
 # MINILIBX
-MLX_NAME		= mlx_Linux
-MLX_PATH 		= ./mlx-linux
-MLX_FLAGS		= -lXext -lX11 -lm
-MLX_HEADER_PATH = $(MLX_PATH)/mlx.h
-MLX_HEADER		= $(addprefix -I,$(MLX_HEADER_PATH))
-MLX				= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_HEADER) $(MLX_FLAGS) 
+MLX_NAME				= mlx
+MLX_PATH 				= /usr/local/lib/
+#MLX_NAME				= mlx_Linux
+#MLX_PATH 			= ./mlx-linux
+MLX_FLAGS				= -lXext -lX11 -lm
+MLX_HEADER_PATH = /usr/local/include/mlx.h
+MLX_HEADER			= $(addprefix -I,$(MLX_HEADER_PATH))
+MLX							= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 # SO_LONG
 SRCS_NAMES 	= main.c
 SRCS_PATH 	= ./srcs/
-SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
+SRCS				= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
 OBJS_PATH 	= ./objs/
-OBJS		= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
+OBJS				= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
 
 BONUS_SRCS_NAMES 	= so_long_bonus.c
 BONUS_SRCS_PATH 	= ./bonus/srcs/
-BONUS_SRCS			= $(addprefix $(BONUS_SRCS_PATH), $(BONUS_SRCS_NAMES))
+BONUS_SRCS				= $(addprefix $(BONUS_SRCS_PATH), $(BONUS_SRCS_NAMES))
 BONUS_OBJS_NAMES	= $(BONUS_SRCS_NAMES:.c=.o)
 BONUS_OBJS_PATH 	= ./bonus/objs/
-BONUS_OBJS			= $(addprefix $(BONUS_OBJS_PATH), $(BONUS_OBJS_NAMES))
+BONUS_OBJS				= $(addprefix $(BONUS_OBJS_PATH), $(BONUS_OBJS_NAMES))
 
 # RULES
-all:	$(NAME)
+all:	header $(NAME)
+	@echo "$(GREEN)[ ✔ ] $(MAGENTA)SO_LONG READY$(WHITE)"
 
-$(NAME):	header lib mlx $(OBJS)
-			@echo "$(YELLOW)[COMPILING]$(WHITE) $(NAME)"
-			@$(CC) $(FLAGS) $(OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
-			@echo "$(GREEN)[✔] $(MAGENTA)SO_LONG created$(WHITE)"
+$(NAME): lib $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir -p $(OBJS_PATH)
+	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) $(NAME)\n"
 	@$(CC) $(FLAGS) $(HEADERS) -o $@ -c $<
 
 lib:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH)
-	@echo "$(GREEN)[✔] LIBFT compiled$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] LIBFT READY$(WHITE)"
 
 mlx:
-	@echo "$(YELLOW)[COMPILING]$(WHITE) $(MLX_NAME)"
+	@echo "$(YELLOW)\n. . . COMPILING . . .\n$(WHITE)"
 	@$(MAKE) --no-print-directory all -sC $(MLX_PATH)
-	@echo "$(GREEN)[✔] MINILIBX compiled$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] MINILIBX compiled$(WHITE)"
 
 clean:
-	@echo "$(YELLOW)[CLEANING]$(WHITE) objets of $(NAME), Libft and $(MLX_NAME)"
+	@echo "$(YELLOW)\n. . . CLEANING . . .\n$(WHITE)"
 	@$(MAKE) --no-print-directory clean -C $(LIB_PATH)
-	@$(MAKE) --no-print-directory clean -sC $(MLX_PATH)
+#@$(MAKE) --no-print-directory clean -sC $(MLX_PATH)
 	@$(RM) $(OBJS) $(BONUS_OBJS)
 	@$(RM) -r $(OBJS_PATH) $(BONUS_OBJS_PATH)
-	@echo "$(GREEN)[✔]$(WHITE) objets of $(NAME), Libft and $(MLX_NAME) cleaned"
+	@echo "$(GREEN)[ ✔ ][ OBJECTS CLEANED ]$(WHITE)"
 
 fclean:	clean
-	@echo "$(YELLOW)[FCLEANING]$(WHITE) $(NAME), Libft and $(MLX_NAME)"
+	@echo "$(YELLOW)\n. . . CLEANING . . .\n$(WHITE)"
 	@$(MAKE) --no-print-directory fclean -C $(LIB_PATH)
 	@$(RM) $(NAME)
-	@echo "$(GREEN)[✔]$(WHITE) $(NAME), Libft and $(MLX_NAME) cleaned"
+	@echo "$(GREEN)[ ✔ ][ ALL CLEANED ]$(WHITE)"
 
 re:	fclean all
 
@@ -116,15 +118,15 @@ FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 
 check:
 	@grep -qe ${USER} -e ${MAIL} srcs/* includes/* && \
-	echo " $(GREEN)[✔]$(WHITE)	Username and email" || echo " $(RED)[✗]$(MAGENTA)	Username and email"
-	@cat $(SRCS) | grep -q $(FN1) $(FN2) && echo " $(RED)[✗]$(MAGENTA)	Forbidden functions" ||\
-	echo " $(GREEN)[✔]$(WHITE)	Forbidden functions"
-	@ls | grep -q -U $(NAME) && echo " $(GREEN)[✔]$(WHITE)	Executable name" ||\
-	echo " $(RED)[✗]$(MAGENTA)	Executable name"
-	@$(MAKE) norme | grep -B 1 Error && echo " $(RED)[✗]$(MAGENTA)	Norme" || \
-	echo " $(GREEN)[✔]$(WHITE)	Norme"
-	@ls $(LIB_PATH) | grep -q $(LIB_NAME) && echo " $(GREEN)[✔]$(WHITE)	Libft" ||\
-	echo " $(RED)[✗]$(MAGENTA)	Libft"
+	echo "$(GREEN)[ ✔ ]$(WHITE)	Username and email" || echo "$(RED)[ ✗ ]$(MAGENTA)	Username and email"
+	@cat $(SRCS) | grep -q $(FN1) $(FN2) && echo "$(RED)[ ✗ ]$(MAGENTA)	Forbidden functions" ||\
+	echo "$(GREEN)[ ✔ ]$(WHITE)	Forbidden functions"
+	@ls | grep -q -U $(NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Executable name" ||\
+	echo "$(RED)[ ✗ ]$(MAGENTA)	Executable name"
+	@$(MAKE) norme | grep -B 1 Error && echo "$(RED)[ ✗ ]$(MAGENTA)	Norme" || \
+	echo "$(GREEN)[ ✔ ]$(WHITE)	Norme"
+	@ls $(LIB_PATH) | grep -q $(LIB_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Libft" ||\
+	echo "$(RED)[ ✗ ]$(MAGENTA)	Libft"
 
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
