@@ -6,14 +6,14 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/03 11:41:46 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:29:38 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#define	WIN1_SX		400
-#define	WIN1_SY		400
+#define	WIN1_SX		500
+#define	WIN1_SY		500
 
 int	main(void)
 {
@@ -41,11 +41,13 @@ int	main(void)
   sleep(5);
 
 	//mlx_destroy_window(mlx_ptr, win1);
+	//mlx_destroy_display(mlx_ptr);
+
+	//mlx_destroy_image(mlx_ptr, fdf->img.img);
+	mlx_destroy_window(mlx_ptr, win1);
 	mlx_destroy_display(mlx_ptr);
 	free(mlx_ptr);
-	free(win1);
 	mlx_ptr = NULL;
-	win1 = NULL;
 
 	return (0);
 }
