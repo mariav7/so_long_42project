@@ -6,42 +6,49 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/03 15:38:27 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:42:55 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#define	WIN1_SX		800
-#define	WIN1_SY		800
+void	ftputchar(char c)
+{
+	write(1, &c, 1);
+}
+
+//mlx_pixel_put(mlx_ptr, win1, 250, 250, 0xFFFFFF);
+int	deal_key(int key, void *param)
+{
+	putchar('X');
+	return (0);
+}
+
+static void	ft_display_usage(void)
+{
+	ft_printf("SO_LONG - Usage\n");
+	ft_printf("For quit, you can use 'Q' or 'ESC key'\n");
+}
 
 int	main(void)
 {
-	ft_printf("Coucou moda foca \n");
+	t_data	mlx;
 
-	void	*mlx_ptr;
-	void	*win1;
-
-	if (!(mlx_ptr = mlx_init()))
+	mlx.mlx_ptr = mlx_init();
+	if (mlx.mlx_ptr == NULL)
+		exit(1);
+	mlx.win1 = mlx_new_window(mlx.mlx_ptr, WIN1_SX, WIN1_SY, "SO_LONG");
+	if (mlx.win1 == NULL)
 	{
-		ft_printf("KO !!!\n");
+		free(mlx.mlx_ptr);
 		exit(1);
 	}
-
-	if (!(win1 = mlx_new_window(mlx_ptr,WIN1_SX,WIN1_SY,"SO_LONG")))
-	{
-		ft_printf("KO !!!\n");
-		exit(1);
-	}
-
-	ft_printf(" => Clear Window ...");
-	//mlx_clear_window(mlx_ptr,win1);
-	sleep(5);
-
-	mlx_destroy_window(mlx_ptr, win1);
-	mlx_destroy_display(mlx_ptr);
-	free(mlx_ptr);
-	mlx_ptr = NULL;
-
+	ft_display_usage();
+	mlx_pixel_put(mlx.mlx_ptr, mlx.win1, 250, 250, 0xFFFFFF);
+	mlx_key_hook(mlx.win1, deal_key, (void *)0);
+	mlx_loop(mlx.mlx_ptr);
+	mlx_destroy_window(mlx.mlx_ptr, mlx.win1);
+	mlx_destroy_display(mlx.mlx_ptr);
+	free(mlx.mlx_ptr);
 	return (0);
 }
