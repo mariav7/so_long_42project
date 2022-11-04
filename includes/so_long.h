@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/04 17:43:31 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:04:45 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERR2 "Usage: ./so_long [file.ber]"
 # define MLX "Minilibx"
 
+# define TITLE "SO_LONG"
 # define WIN_X  800
 # define WIN_Y 550
 
