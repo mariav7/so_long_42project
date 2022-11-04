@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/03 15:33:48 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/04 15:25:07 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ LIB			= -L$(LIB_PATH) -l$(LIB_NAME)
 # MINILIBX
 MLX_NAME	= mlx_Linux
 MLX_PATH 	= ./mlx-linux
-MLX_FLAGS	= -lXext -lX11 -LIB_NAME
+MLX_FLAGS	= -lXext -lX11 -lmlx
 MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 # SO_LONG
-SRCS_NAMES 	= main.c
+SRCS_NAMES 	= main.c exit_handling.c key_hooks.c
 SRCS_PATH 	= ./srcs/
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
@@ -55,8 +55,8 @@ $(NAME): lib mlx $(OBJS)
 	@$(CC) $(FLAGS) $(OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@mkdir -p $(OBJS_PATH)
 	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) $(NAME)\n"
+	@mkdir -p $(OBJS_PATH)
 	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
 
 #$(BONUS_OBJS_PATH)%.o: $(BONUS_SRCS_PATH)%.c
@@ -119,19 +119,19 @@ FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 
 check:
 	@grep -qe ${USER} -e ${MAIL} srcs/* includes/* && \
-	echo "$(GREEN)[ ✔ ]$(WHITE)	Username and email" || echo "$(RED)[ ✗ ]$(MAGENTA)	Username and email"
-	@cat $(SRCS) | grep -q $(FN1) $(FN2) && echo "$(RED)[ ✗ ]$(MAGENTA)	Forbidden functions" ||\
+	echo "$(GREEN)[ ✔ ]$(WHITE)	Username and email" || echo "$(RED)[ ✗ ]$(BLUE)	Username and email"
+	@cat $(SRCS) | grep -q $(FN1) $(FN2) && echo "$(RED)[ ✗ ]$(BLUE)	Forbidden functions" ||\
 	echo "$(GREEN)[ ✔ ]$(WHITE)	Forbidden functions"
 	@ls | grep -q -U $(NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Executable name" ||\
-	echo "$(RED)[ ✗ ]$(MAGENTA)	Executable name"
-	@$(MAKE) norme | grep -B 1 Error && echo "$(RED)[ ✗ ]$(MAGENTA)	Norme" || \
+	echo "$(RED)[ ✗ ]$(BLUE)	Executable name"
+	@$(MAKE) norme | grep -B 1 Error && echo "$(RED)[ ✗ ]$(BLUE)	Norme" || \
 	echo "$(GREEN)[ ✔ ]$(WHITE)	Norme"
 	@ls $(LIB_PATH) | grep -q $(LIB_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Libft" ||\
-	echo "$(RED)[ ✗ ]$(MAGENTA)	Libft"
+	echo "$(RED)[ ✗ ]$(BLUE)	Libft"
 
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
-	norminette $(SRCS_PATH) $(HEADERS_PATHS)
+	norminette $(SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
 #$(BONUS_SRCS_PATH)
 
 #test:		$(NAME)	

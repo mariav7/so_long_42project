@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:06:01 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/03 18:41:09 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:47:04 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 static int	key_hook(int key_code, t_data *d)
 {
-	if (key_code == ROTATE_LEFT)
-		d->left -= 5;
-	else if (key_code == ROTATE_RIGTH)
-		d->right += 5;
-	else if (key_code == ROTATE_UP)
-		d->up -= 2;
-	else if (key_code == ROTATE_DOWN)
-		d->down += 2;
+	if (key_code == LEFT)
+		ft_printf("coucou\n");
+	else if (key_code == RIGTH)
+		ft_printf("coucou\n");
+	else if (key_code == UP)
+		ft_printf("coucou\n");
+	else if (key_code == DOWN)
+		ft_printf("coucou\n");
 	else if (key_code == ESCAPE)
-		ft_safe_exit_free(fdf);
-	ft_render(fdf);
+		free_n_exit_safe(d);
 	return (0);
 }
 
-void	ft_control_keys(t_fdf *fdf)
+void	ft_control_keys(t_data *d)
 {
-	mlx_key_hook(fdf->window, &key_hook, fdf);
+	mlx_key_hook(d->window, &key_hook, d);
 }

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/03 18:35:25 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:14:02 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,36 @@
 /* Other libs */
 # include <mlx.h>
 
-# define WIN1_SX  800
-# define WIN1_SY 550
+/* Defines */
+# define ERR "\033[1;31mError \033[0m"
+# define ERR2 "Usage: ./so_long [map.ber]"
+# define MLX "Minilibx"
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+# define WIN_X  800
+# define WIN_Y 550
 
-# define ROTATE_LEFT 65361
-# define ROTATE_RIGTH 65363
-# define ROTATE_UP 65362
-# define ROTATE_DOWN 65364
+# define LEFT 97
+# define RIGTH 100
+# define UP 119
+# define DOWN 115
 # define ESCAPE 65307
 
 /* STRUCTURES */
 typedef struct s_data
 {
     void	*mlx_ptr;
-	void	*win1;
+	void	*window;
 }   t_data;
 
 /* main.c */
+
+/* key_hooks.c */
+void	ft_control_keys(t_data *d);
+
+/* exit_handling.c */
+void    basic_error_message(char *err);
+void    error_message_n_exit(char *err);
+void	error_exit(t_data *d, char *err);
+void	free_n_exit_safe(t_data *d);
 
 #endif
