@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/04 17:34:02 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:45:26 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 {
 	t_data	mlx;
 
-//	if (argc <= 1)
-//		error_message_n_exit(ERR);
+	if (argc <= 1 || argc >= 3)
+		basic_error_message(ERR2);
 	(void)argc;
 	(void)argv;
 	mlx.mlx_ptr = mlx_init();

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/04 17:14:02 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:43:31 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 /* Defines */
 # define ERR "\033[1;31mError \033[0m"
-# define ERR2 "Usage: ./so_long [map.ber]"
+# define ERR2 "Usage: ./so_long [file.ber]"
 # define MLX "Minilibx"
 
 # define WIN_X  800
