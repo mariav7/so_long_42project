@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/04 19:04:45 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:34:55 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@
 /* Other libs */
 # include <mlx.h>
 
-/* Defines */
+/* Error messages */
 # define ERR "\033[1;31mError \033[0m"
 # define ERR2 "Usage: ./so_long [file.ber]"
+# define ERR_FILE "File: type .ber needed"
+# define ERR_FILE2 "File: "
+# define ERR_FILE3 "File: empty file"
 # define MLX "Minilibx"
 
+/* Defines */
 # define TITLE "SO_LONG"
 # define WIN_X  800
 # define WIN_Y 550
@@ -39,6 +43,7 @@ typedef struct s_data
 {
     void	*mlx_ptr;
 	void	*window;
+    char    **map;
 }   t_data;
 
 /* main.c */
@@ -50,6 +55,14 @@ void	ft_control_keys(t_data *d);
 void    basic_error_message(char *err);
 void    error_message_n_exit(char *err);
 void	error_exit(t_data *d, char *err);
+void	free_strs(char	**strs);
 void	free_n_exit_safe(t_data *d);
+
+/* check_input.c */
+void	check_input(char *file_line);
+
+/* get_map.c */
+char	**get_map(char *map);
+int	    get_height(char **map);
 
 #endif

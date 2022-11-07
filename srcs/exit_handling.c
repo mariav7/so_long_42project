@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/04 17:11:35 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:45:15 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,32 @@ void	error_exit(t_data *d, char *err)
 	error_message_n_exit(err);
 }
 
+void	free_strs(char	**strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+	strs = NULL;
+}
+
 void	free_n_exit_safe(t_data *d)
 {
 //	free(d->);
-//	free(d->);
+	if (d->map)
+		free_strs(d->map);
 //	mlx_destroy_image(d->mlx, d->img.img);
-	mlx_destroy_window(d->mlx_ptr, d->window);
-	mlx_destroy_display(d->mlx_ptr);
-	free(d->mlx_ptr);
+	if (d->mlx_ptr)
+	{
+		if (d->window)
+			mlx_destroy_window(d->mlx_ptr, d->window);
+		mlx_destroy_display(d->mlx_ptr);
+		free(d->mlx_ptr);
+	}
 	exit(EXIT_SUCCESS);
 }
