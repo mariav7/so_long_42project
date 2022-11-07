@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/07 11:34:55 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:55:17 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /* Error messages */
 # define ERR "\033[1;31mError \033[0m"
 # define ERR2 "Usage: ./so_long [file.ber]"
-# define ERR_FILE "File: type .ber needed"
+# define ERR_FILE "File: invalid file type, [.ber] needed"
 # define ERR_FILE2 "File: "
 # define ERR_FILE3 "File: empty file"
 # define MLX "Minilibx"
