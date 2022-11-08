@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/07 11:14:34 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/08 14:10:53 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ MLX_FLAGS	= -lXext -lX11 -lmlx
 MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 # SO_LONG
-SRCS_NAMES 	= main.c exit_handling.c key_hooks.c check_input.c get_map.c
+SRCS_NAMES 	= main.c exit_handling.c key_hooks.c check_input.c get_map.c \
+			map.c
 SRCS_PATH 	= ./srcs/
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)

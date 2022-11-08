@@ -6,22 +6,11 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 11:18:05 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:35:32 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	get_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i] != NULL)
-		i++;
-	printf("height: %d\n", i);
-	return (i);
-}
 
 static char	*string_join(char *s1, char const *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 11:46:07 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:22:16 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define ERR_FILE "File: invalid file type, [.ber] needed"
 # define ERR_FILE2 "File"
 # define ERR_FILE3 "File: empty file"
+# define ERR_MAP "Map: is not valid"
+# define ERR_MAP2 "Map: must contain at least 1 item, 1 exit and 1 player"
+# define ERR_MAP3 "Map: is not rectangular"
+# define ERR_MAP4 "Map: is not surrounded by walls"
+# define ERR_MAP5 "Map: path not valid"
 # define MLX "Minilibx"
 
 /* Defines */
@@ -41,17 +46,20 @@
 /* STRUCTURES */
 typedef struct s_map
 {
-    char    **map;
-    int     height;
-    int     width;
-}   t_map;
+	char	**map;
+	int		items;
+	int		exit;
+	int		player;
+	int		height;
+	int		width;
+}	t_map;
 
 typedef struct s_data
 {
-    void	*mlx_ptr;
+	void	*mlx_ptr;
 	void	*window;
-    t_map   *map;
-}   t_data;
+	t_map	*map;
+}	t_data;
 
 /* main.c */
 
@@ -59,8 +67,8 @@ typedef struct s_data
 void	ft_control_keys(t_data *d);
 
 /* exit_handling.c */
-void    basic_error_message(char *err, void *truc);
-void    error_message_n_exit(char *err);
+void	basic_error_message(char *err, void *truc);
+void	error_message_n_exit(char *err);
 void	error_exit(t_data *d, char *err);
 void	free_strs(char	**strs);
 void	free_n_exit_safe(t_data *d);
@@ -69,8 +77,9 @@ void	free_n_exit_safe(t_data *d);
 void	check_input(char *file_line);
 
 /* get_map.c */
-//void	get_map(t_data *d, char *map);
 char	**get_map(char *map);
-int	    get_height(char **map);
+
+/* is_map_valid.c */
+void	is_map_valid(t_data *m);
 
 #endif

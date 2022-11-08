@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 12:09:49 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:17:26 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	init_vars(t_data *d, t_map *m)
 	d->window = NULL;
 	d->map = m;
 	d->map->map = NULL;
+	d->map->items = 0;
+	d->map->exit = 0;
+	d->map->player = 0;
 	d->map->height = 0;
 	d->map->width = 0;
-/* 	m->map = NULL;
-	m->height = 0;
-	m->width = 0; */
 }
 
 int	main(int argc, char **argv)
@@ -48,13 +48,12 @@ int	main(int argc, char **argv)
 
 	if (argc <= 1 || argc >= 3)
 		basic_error_message(ERR_USAGE, NULL);
-	(void)argc;
 	check_input(argv[1]);
-	//init_vars(&mlx);
 	init_vars(&mlx, &fmap);
 	mlx.map->map = get_map(argv[1]);
 	if (mlx.map->map != NULL)
 	{
+		is_map_valid(&mlx);
 		//mlx.mlx_ptr = mlx_init();
 		//if (mlx.mlx_ptr == NULL)
 		//	basic_error_message(MLX);

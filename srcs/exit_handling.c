@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 11:56:18 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:39:37 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	error_exit(t_data *d, char *err)
 		mlx_destroy_display(d->mlx_ptr);
 		free(d->mlx_ptr);
 	}
-	error_message_n_exit(err);
+	basic_error_message(err, NULL);
+	//error_message_n_exit(err);
 }
 
 void	free_strs(char	**strs)
@@ -58,8 +59,7 @@ void	free_strs(char	**strs)
 
 void	free_n_exit_safe(t_data *d)
 {
-//	free(d->);
-	if (d->map->map)
+	if (d->map)
 		free_strs(d->map->map);
 //	mlx_destroy_image(d->mlx, d->img.img);
 	if (d->mlx_ptr)
