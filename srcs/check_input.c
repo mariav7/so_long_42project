@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:36:07 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/07 10:51:42 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:01:22 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	check_input(char *file)
 		}
 		file++;
 	}
-	basic_error_message(ERR_FILE);
+	basic_error_message(ERR_FILE, NULL);
 }
