@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 15:17:26 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:27:36 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	init_vars(t_data *d, t_map *m)
 	d->window = NULL;
 	d->map = m;
 	d->map->map = NULL;
+	d->map->walls = NULL;
 	d->map->items = 0;
 	d->map->exit = 0;
 	d->map->player = 0;

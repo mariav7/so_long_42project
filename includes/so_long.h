@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 15:22:16 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:26:52 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 typedef struct s_map
 {
 	char	**map;
+	char	*walls;
 	int		items;
 	int		exit;
 	int		player;

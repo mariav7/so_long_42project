@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 15:03:12 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:25:08 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,25 @@ static int valid_characters(t_data *m)
 
 static void count_characters(t_data *m)
 {
-    int i;
+    int y;
     int x;
 
-    i = 0;
-    while (m->map->map[i])
+    y = 0;
+    while (m->map->map[y])
     {
         x = 0;
-        while(m->map->map[i][x])
+        while(m->map->map[y][x])
         {
-            if (m->map->map[i][x] == 'C')
+            if (m->map->map[y][x] == 'C')
                 m->map->items++;
-            else if (m->map->map[i][x] == 'E')
+            else if (m->map->map[y][x] == 'E')
                 m->map->exit++;
-            else if (m->map->map[i][x] == 'P')
+            else if (m->map->map[y][x] == 'P')
                 m->map->player++;
             x++;
         }
-        i++;
+        y++;
+        m->map->height++;
     }
 }
 
@@ -80,10 +81,47 @@ static int min_characters(t_data *m)
     return (1);
 }
 
+static int is_rectangular(t_data *m)
+{
+    int y;
+    int i;
+    int *widths;
+
+    y = 0;
+    widths = (int *)ft_calloc(m->map->height, sizeof(int));
+    while (m->map->map[y])
+    {
+        widths[y] = ft_strlen(m->map->map[y]);
+        y++;
+    }
+    y = 0;
+    while (y < m->map->height)
+    {
+        i = 1;
+        while (i < m->map->height)
+        {
+            if (widths[y] > widths[i] || widths[y] < widths[i])
+            {
+                free(widths);
+                return (0);
+            }
+            i++;
+        }
+        y++;
+    }
+    m->map->width = widths[0];
+    free(widths);
+    if (m->map->height >= m->map->width)
+        return (0);
+    return (1);
+}
+
 void is_map_valid(t_data *m)
 {
     if (!valid_characters(m))
         error_exit(m, ERR_MAP);
     if (!min_characters(m))
         error_exit(m, ERR_MAP2);
+    if (!is_rectangular(m))
+        error_exit(m, ERR_MAP3);
 }

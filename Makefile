@@ -6,14 +6,14 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/08 14:10:53 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/08 16:31:58 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # GENERAL
 NAME	= so_long
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -g -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
