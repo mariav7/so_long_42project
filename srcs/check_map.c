@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 17:25:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 20:41:08 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/* static int	get_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i] != NULL)
-		i++;
-	printf("height: %d\n", i);
-	return (i);
-} */
 
 static int valid_characters(t_data *m)
 {
@@ -34,9 +23,11 @@ static int valid_characters(t_data *m)
         x = 0;
         while(m->map->map[i][x])
         {
-            if (m->map->map[i][x] != 'C' && m->map->map[i][x] != '1'
-                && m->map->map[i][x] != 'E' && m->map->map[i][x] != 'P'
-                && m->map->map[i][x] != '0')
+            if (m->map->map[i][x] != m->map->c
+                && m->map->map[i][x] != m->map->wall
+                && m->map->map[i][x] != m->map->e
+                && m->map->map[i][x] != m->map->p
+                && m->map->map[i][x] != m->map->space)
                 return (0);
             x++;
         }
@@ -56,11 +47,11 @@ static void count_characters(t_data *m)
         x = 0;
         while(m->map->map[y][x])
         {
-            if (m->map->map[y][x] == 'C')
+            if (m->map->map[y][x] == m->map->c)
                 m->map->items++;
-            else if (m->map->map[y][x] == 'E')
+            else if (m->map->map[y][x] == m->map->e)
                 m->map->exit++;
-            else if (m->map->map[y][x] == 'P')
+            else if (m->map->map[y][x] == m->map->p)
                 m->map->player++;
             x++;
         }
@@ -83,36 +74,22 @@ static int min_characters(t_data *m)
 
 static int is_rectangular(t_data *m)
 {
-    int y;
-    int i;
-    int *widths;
+    int		y;
+	int		x;
+	int		len_x;
 
+	len_x = ft_strlen(m->map->map[0]);
     y = 0;
-    widths = (int *)ft_calloc(m->map->height, sizeof(int));
-    while (m->map->map[y])
-    {
-        widths[y] = ft_strlen(m->map->map[y]);
-        y++;
-    }
-    y = 0;
-    while (y < m->map->height)
-    {
-        i = 1;
-        while (i < m->map->height)
-        {
-            if (widths[y] > widths[i] || widths[y] < widths[i])
-            {
-                free(widths);
-                return (0);
-            }
-            i++;
-        }
-        y++;
-    }
-    m->map->width = widths[0];
-    free(widths);
-    if (m->map->height >= m->map->width)
-        return (0);
+	while (m->map->map[y] != NULL)
+	{
+        x = 0;
+		while (m->map->map[y][x])
+			x++;
+		if (x != len_x)
+			return (0);
+		y++;
+	}
+    m->map->width = len_x;
     return (1);
 }
 
@@ -124,4 +101,8 @@ void is_map_valid(t_data *m)
         error_exit(m, ERR_MAP2);
     if (!is_rectangular(m))
         error_exit(m, ERR_MAP3);
+    if (!is_walled(m))
+        error_exit(m, ERR_MAP4);
+//    if (!valid_path(m))
+//        error_exit(m, ERR_MAP5);
 }

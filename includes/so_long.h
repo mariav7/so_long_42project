@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 17:26:52 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 20:41:44 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 # define ERR_FILE "File: invalid file type, [.ber] needed"
 # define ERR_FILE2 "File"
 # define ERR_FILE3 "File: empty file"
-# define ERR_MAP "Map: is not valid"
-# define ERR_MAP2 "Map: must contain at least 1 item, 1 exit and 1 player"
-# define ERR_MAP3 "Map: is not rectangular"
-# define ERR_MAP4 "Map: is not surrounded by walls"
+# define ERR_MAP "Map: not valid"
+# define ERR_MAP2 "Map: must contain 1 exit, 1 player and at least 1 item"
+# define ERR_MAP3 "Map: not rectangular"
+# define ERR_MAP4 "Map: not surrounded by walls"
 # define ERR_MAP5 "Map: path not valid"
 # define MLX "Minilibx"
 
-/* Defines */
+/* Other macros */
 # define TITLE "SO_LONG"
 # define WIN_X  800
 # define WIN_Y 550
@@ -47,7 +47,11 @@
 typedef struct s_map
 {
 	char	**map;
-	char	*walls;
+	char	e;
+	char	c;
+	char	p;
+	char	wall;
+	char	space;
 	int		items;
 	int		exit;
 	int		player;
@@ -74,13 +78,16 @@ void	error_exit(t_data *d, char *err);
 void	free_strs(char	**strs);
 void	free_n_exit_safe(t_data *d);
 
-/* check_input.c */
-void	check_input(char *file_line);
+/* check_file.c */
+void	check_file(char *file_line);
 
 /* get_map.c */
 char	**get_map(char *map);
 
-/* is_map_valid.c */
+/* check_map.c */
 void	is_map_valid(t_data *m);
+
+/* check_map2.c */
+int		is_walled(t_data *m);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:36:07 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 11:01:22 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:50:45 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	find_extension(char *file, char *to_find)
 	return (0);
 }
 
-void	check_input(char *file)
+void	check_file(char *file)
 {
 	while (*file)
 	{
