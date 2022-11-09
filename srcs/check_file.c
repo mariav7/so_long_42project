@@ -6,20 +6,20 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:36:07 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 19:50:45 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:35:40 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	find_extension(char *file, char *to_find)
+static int	find_extension(char *file, char *file_type)
 {
 	int	i;
 
 	i = 0;
-	while (to_find[i])
+	while (file_type[i])
 	{
-		if (to_find[i] != file[i])
+		if (file_type[i] != file[i])
 			return (0);
 		i++;
 	}
@@ -34,7 +34,7 @@ void	check_file(char *file)
 	{
 		if (*file == '.')
 		{
-			if (find_extension(file, ".ber"))
+			if (find_extension(file, FILE_TYPE))
 				return ;
 		}
 		file++;

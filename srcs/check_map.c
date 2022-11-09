@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 20:41:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:37:15 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static int valid_characters(t_data *m)
 {
-    int i;
+    int y;
     int x;
 
-    i = 0;
-    while (m->map->map[i])
+    y = 0;
+    while (m->map->map[y])
     {
         x = 0;
-        while(m->map->map[i][x])
+        while(m->map->map[y][x])
         {
-            if (m->map->map[i][x] != m->map->c
-                && m->map->map[i][x] != m->map->wall
-                && m->map->map[i][x] != m->map->e
-                && m->map->map[i][x] != m->map->p
-                && m->map->map[i][x] != m->map->space)
+            if (m->map->map[y][x] != m->map->c
+                && m->map->map[y][x] != m->map->wall
+                && m->map->map[y][x] != m->map->e
+                && m->map->map[y][x] != m->map->p
+                && m->map->map[y][x] != m->map->space)
                 return (0);
             x++;
         }
-        i++;
+        y++;
     }
     return (1);
 }

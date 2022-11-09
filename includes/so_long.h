@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 20:41:44 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:35:32 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define MLX "Minilibx"
 
 /* Other macros */
+# define FILE_TYPE ".ber"
 # define TITLE "SO_LONG"
 # define WIN_X  800
 # define WIN_Y 550
