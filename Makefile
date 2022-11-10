@@ -6,14 +6,14 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/10 20:58:27 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/10 21:04:05 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # GENERAL
 NAME	= so_long
 CC		= cc
-FLAGS	= -g -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
@@ -147,9 +147,9 @@ test: header $(NAME)
 	@cat $(PATH_MAP)map1.ber
 	@echo "$(WHITE)\n"
 	@if $(test2) then \
-        echo "\n$(GREEN)[ ✔ ] TEST$(WHITE)\n\n"; \
+        echo "\n$(GREEN)[ ✔ ] TEST NORMAL$(WHITE)\n\n"; \
 	else \
-		echo "\n$(RED)[ ✗ ] TEST$(WHITE)\n\n"; \
+		echo "\n$(RED)[ ✗ ] TEST NORMAL$(WHITE)\n\n"; \
     fi
 
 tests: header $(NAME)

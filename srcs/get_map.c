@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 11:45:49 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:19:03 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,6 @@ static char	*string_join(char *s1, char const *s2)
 	free(s1);
 	return (new_str);
 }
-
-/* char	**get_map(char *fmap)
-{
-	char	*line;
-	char	*all_lines;
-	char	**map;
-	int		fd;
-
-	fd = open(fmap, O_RDONLY);
-	if (fd < 0)
-		error_message_n_exit(ERR_FILE2);
-	line = "";
-	all_lines = ft_strdup("");
-	while (line)
-	{
-		line = get_next_line(fd);
-		if (line == NULL || line[0] == '\n')
-			break ;
-		all_lines = string_join(all_lines, line);
-		free(line);
-	}
-	free(line);
-	close(fd);
-	if (all_lines[0] == '\0')
-		basic_error_message(ERR_FILE3, (void *)all_lines);
-	map = ft_split(all_lines, '\n');
-	free(all_lines);
-	return (map);
-} */
 
 void	get_map(t_data *m, char *fmap)
 {
