@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 11:45:13 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:59:54 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # define ERR_FILE "File: invalid file type, [.ber] needed"
 # define ERR_FILE2 "File"
 # define ERR_FILE3 "File: empty file"
-# define ERR_MAP "Map: not valid"
+# define ERR_MAP "Map: invalid"
 # define ERR_MAP2 "Map: must contain 1 exit, 1 player and at least 1 item"
 # define ERR_MAP3 "Map: not rectangular"
 # define ERR_MAP4 "Map: not surrounded by walls"
-# define ERR_MAP5 "Map: path not valid"
+# define ERR_MAP5 "Map: invalid path"
 # define MLX "Minilibx"
 
 /* Other macros */

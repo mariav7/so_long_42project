@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/10 20:09:51 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/10 20:58:27 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -155,13 +155,13 @@ test: header $(NAME)
 tests: header $(NAME)
 	@echo "\n$(YELLOW)... RUNNING ERROR TESTS ...$(WHITE)\n"
 
-	@echo "$(BLUE)TEST: NOT VALID FILE$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-valid-file.txt
+	@echo "$(BLUE)TEST: INVALID FILE TYPE$(YELLOW)\n"
+	@cat $(PATH_BADMAP)invalid-file.txt
 	@echo "$(WHITE)\n"
-	@if $(test)not-valid-file.txt; then \
-		echo "\n$(RED)[ ✗ ] TEST NOT VALID FILE$(WHITE)\n\n"; \
+	@if $(test)invalid-file.txt; then \
+		echo "\n$(RED)[ ✗ ] TEST INVALID FILE$(WHITE)\n\n"; \
 	else \
-        echo "\n$(GREEN)[ ✔ ] TEST NOT VALID FILE$(WHITE)\n\n"; \
+        echo "\n$(GREEN)[ ✔ ] TEST INVALID FILE$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: EMPTY MAP$(YELLOW)\n"
@@ -173,13 +173,13 @@ tests: header $(NAME)
 		echo "\n$(GREEN)[ ✔ ] TEST EMPTY MAP$(WHITE)\n\n"; \
     fi
 	
-	@echo "$(BLUE)TEST: NOT VALID CHARACTERS$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-valid-characters.ber
+	@echo "$(BLUE)TEST: INVALID CHARACTERS$(YELLOW)\n"
+	@cat $(PATH_BADMAP)invalid-characters.ber
 	@echo "$(WHITE)\n"
-	@if $(test)not-valid-characters.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST NOT VALID CHARACTERS$(WHITE)\n\n"; \
+	@if $(test)invalid-characters.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
 	else \
-		echo "\n$(GREEN)[ ✔ ] TEST NOT VALID CHARACTERS$(WHITE)\n\n"; \
+		echo "\n$(GREEN)[ ✔ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: MIN. CHARACTERS$(YELLOW)\n"
@@ -209,13 +209,13 @@ tests: header $(NAME)
 		echo "\n$(GREEN)[ ✔ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
     fi
 
-	@echo "$(BLUE)TEST: NOT VALID PATH$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-valid-path.ber
+	@echo "$(BLUE)TEST: INVALID PATH$(YELLOW)\n"
+	@cat $(PATH_BADMAP)invalid-path.ber
 	@echo "$(WHITE)\n"
-	@if $(test)not-valid-path.ber; then \
-		echo "\n$(RED)[ ✗ ] TEST NOT VALID PATH$(WHITE)\n\n"; \
+	@if $(test)invalid-path.ber; then \
+		echo "\n$(RED)[ ✗ ] TEST INVALID PATH$(WHITE)\n\n"; \
 	else \
-		echo "\n$(GREEN)[ ✔ ] TEST NOT VALID PATH$(WHITE)\n\n"; \
+		echo "\n$(GREEN)[ ✔ ] TEST INVALID PATH$(WHITE)\n\n"; \
     fi
 
 .PHONY:	all clean fclean re bonus norme check test tests
