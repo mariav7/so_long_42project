@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 20:41:38 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:49:18 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,19 @@ static void	init_vars(t_data *d, t_map *m)
 	d->window = NULL;
 	d->map = m;
 	d->map->map = NULL;
+	d->map->tmp_map = NULL;
 	d->map->c = 'C';
 	d->map->e = 'E';
 	d->map->p = 'P';
 	d->map->wall = '1';
 	d->map->space = '0';
 	d->map->items = 0;
+	d->map->tmp_items = 0;
 	d->map->exit = 0;
+	d->map->tmp_exit = 0;
 	d->map->player = 0;
+	d->map->play_y = 0;
+	d->map->play_x = 0;
 	d->map->height = 0;
 	d->map->width = 0;
 }
@@ -55,8 +60,10 @@ int	main(int argc, char **argv)
 		basic_error_message(ERR_USAGE, NULL);
 	check_file(argv[1]);
 	init_vars(&mlx, &fmap);
-	mlx.map->map = get_map(argv[1]);
-	if (mlx.map->map != NULL)
+	//mlx.map->map = get_map(argv[1]);
+	get_map(&mlx, argv[1]);
+	//if (mlx.map->map != NULL)
+	if (mlx.map->map != NULL && mlx.map->tmp_map != NULL)
 	{
 		is_map_valid(&mlx);
 		//mlx.mlx_ptr = mlx_init();

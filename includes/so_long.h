@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/09 16:35:32 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:45:13 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,19 @@
 typedef struct s_map
 {
 	char	**map;
+	char	**tmp_map;
 	char	e;
 	char	c;
 	char	p;
 	char	wall;
 	char	space;
 	int		items;
+	int		tmp_items;
 	int		exit;
+	int		tmp_exit;
 	int		player;
+	int		play_y;
+	int		play_x;
 	int		height;
 	int		width;
 }	t_map;
@@ -83,12 +88,14 @@ void	free_n_exit_safe(t_data *d);
 void	check_file(char *file_line);
 
 /* get_map.c */
-char	**get_map(char *map);
+void	get_map(t_data *m, char *fmap);
+//char	**get_map(char *map);
 
 /* check_map.c */
 void	is_map_valid(t_data *m);
 
 /* check_map2.c */
 int		is_walled(t_data *m);
+int		valid_path(t_data *m);
 
 #endif

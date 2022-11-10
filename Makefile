@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/08 19:58:32 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/10 20:02:46 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,8 @@ FNCTION		= $(shell ls -l $(LIB_PATH)/srcs | grep ft_ | sed 's/^.*ft_//' | sed 's
 FORBID		= printf $(FNCTION)
 FN1			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
+PATH_BADMAP	= ./maps/bad_maps/
+PATH_MAP	= ./maps/
 
 check:
 	@grep -qe ${USER} -e ${MAIL} srcs/* includes/* && \
@@ -135,15 +137,84 @@ norme:
 	norminette $(SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
 #$(BONUS_SRCS_PATH)
 
-#test:		$(NAME)	
-#	$(eval ARG = $(shell seq -50 50 | shuf -n 19))
-#	@valgrind ./push_swap $(ARG)
+test = valgrind --leak-check=full --error-exitcode=3 ./$(NAME) $(PATH_BADMAP)
+test2 = valgrind --leak-check=full --error-exitcode=3 ./so_long ./maps/map1.ber;
 
-#test3:		$(NAME)	
-#	$(eval ARG = $(shell seq -50 50 | shuf -n 3))
-#	./push_swap $(ARG) | ./checker_linux $(ARG)
-#	@echo -n "$(BLUE)Instructions: $(WHITE)"
-#	@./push_swap $(ARG) | wc -l
+test: header $(NAME)
+	@echo "$(BLUE)TEST: NORMAL$(YELLOW)\n"
+	@cat $(PATH_MAP)map1.ber
+	@echo "$(WHITE)\n"
+	@if $(test2) then \
+        echo "\n$(GREEN)[ ✔ ] TEST$(WHITE)\n\n"; \
+	else \
+		echo "\n$(RED)[ ✗ ] TEST$(WHITE)\n\n"; \
+    fi
+
+tests: header $(NAME)
+	@echo "\n$(YELLOW)... RUNNING ERROR TESTS ...$(WHITE)\n"
+
+	@echo "$(BLUE)TEST: NOT VALID FILE$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-valid-file.txt
+	@echo "$(WHITE)\n"
+	@if $(test)not-valid-file.txt; then \
+		echo "\n$(RED)[ ✗ ] TEST NOT VALID FILE$(WHITE)\n\n"; \
+	else \
+        echo "\n$(GREEN)[ ✔ ] TEST NOT VALID FILE$(WHITE)\n\n"; \
+    fi
+
+	@echo "$(BLUE)TEST: EMPTY MAP$(YELLOW)\n"
+	@cat $(PATH_BADMAP)emptymap.ber
+	@echo "$(WHITE)\n"
+	@if $(test)emptymap.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST EMPTY MAP$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST EMPTY MAP$(WHITE)\n\n"; \
+    fi
+	
+	@echo "$(BLUE)TEST: NOT VALID CHARACTERS$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-valid-characters.ber
+	@echo "$(WHITE)\n"
+	@if $(test)not-valid-characters.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST NOT VALID CHARACTERS$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST NOT VALID CHARACTERS$(WHITE)\n\n"; \
+    fi
+
+	@echo "$(BLUE)TEST: MIN. CHARACTERS$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-min-characters.ber
+	@echo "$(WHITE)\n"
+	@if $(test)not-min-characters.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
+    fi
+
+	@echo "$(BLUE)TEST: IS NOT RECTANGULAR$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-rectangular.ber
+	@echo "$(WHITE)\n"
+	@if $(test)not-rectangular.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
+    fi
+
+	@echo "$(BLUE)TEST: IS NOT WALLED$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-walled.ber
+	@echo "$(WHITE)\n"
+	@if $(test)not-walled.ber; then \
+        echo "\n$(RED)[ ✗ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
+    fi
+
+	@echo "$(BLUE)TEST: NOT VALID PATH$(YELLOW)\n"
+	@cat $(PATH_BADMAP)not-valid-path.ber
+	@echo "$(WHITE)\n"
+	@if $(test)not-valid-path.ber; then \
+		echo "\n$(RED)[ ✗ ] TEST NOT VALID PATH$(WHITE)\n\n"; \
+	else \
+		echo "\n$(GREEN)[ ✔ ] TEST NOT VALID PATH$(WHITE)\n\n"; \
+    fi
 
 .PHONY:	all clean fclean re bonus norme check
 

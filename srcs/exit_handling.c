@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/08 13:39:37 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:24:23 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void    error_message_n_exit(char *err)
 
 void	error_exit(t_data *d, char *err)
 {
-	if (d->map)
+	if (d->map->map)
 		free_strs(d->map->map);
+	if (d->map->tmp_map)
+		free_strs(d->map->tmp_map);
 	if (d->mlx_ptr)
 	{
 		if (d->window)
@@ -59,8 +61,10 @@ void	free_strs(char	**strs)
 
 void	free_n_exit_safe(t_data *d)
 {
-	if (d->map)
+	if (d->map->map)
 		free_strs(d->map->map);
+	if (d->map->tmp_map)
+		free_strs(d->map->tmp_map);
 //	mlx_destroy_image(d->mlx, d->img.img);
 	if (d->mlx_ptr)
 	{

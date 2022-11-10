@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:56:08 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/09 17:31:07 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:52:48 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,62 +38,56 @@ static int	check_line(char *line, char wall)
 	return (1);
 }
 
-int is_walled(t_data *m)
-{
-  int i;
-  
-  if (!check_line(m->map->map[0], m->map->wall)
-      || !check_line(m->map->map[m->map->height - 1], m->map->wall))
-    return (0);
-  i = 0;
-  while (m->map->map[i])
-  {
-    if (!check_col(m->map->map[i], m->map->wall))
-      return (0);
-    i++;
-  }
-  return (1);
-}
-
-static void	check_validmap(t_data *d, int x, int y)
-{
-	char	*p;
-
-	p = &d->tmp_map2[y][x];
-	if (*p == 'E')
-		d->valid_ex = 1;
-	if (*p != '1')
-	{
-		if (*p == 'C')
-			d->tmp_food_count--;
-		*p = '.';
-		if (d->tmp_map2[y][x + 1] != '1' &&
-			d->tmp_map2[y][x + 1] != '.')
-			ft_check_validmap(d, x + 1, y);
-		if (d->tmp_map2[y][x - 1] != '1' &&
-			d->tmp_map2[y][x - 1] != '.')
-			ft_check_validmap(d, x - 1, y);
-		if (d->tmp_map2[y - 1][x] != '1' &&
-			d->tmp_map2[y - 1][x] != '.')
-			ft_check_validmap(d, x, y - 1);
-		if (d->tmp_map2[y + 1][x] != '1' &&
-			d->tmp_map2[y + 1][x] != '.')
-			ft_check_validmap(d, x, y + 1);
-	}
-}
-
-void	ft_check_path(t_data *d)
+int	is_walled(t_data *m)
 {
 	int	i;
 
-	check_validmap(d, d->ply_x, d->ply_y);
+	if (!check_line(m->map->map[0], m->map->wall)
+		|| !check_line(m->map->map[m->map->height - 1], m->map->wall))
+		return (0);
 	i = 0;
-	while (d->tmp_map2[i])
+	while (m->map->map[i])
 	{
-		free(d->tmp_map2[i]);
-		i++;
+		if (!check_col(m->map->map[i], m->map->wall))
+			return (0);
+	i++;
 	}
-	free(d->tmp_map2);
-	if (d->tmp_food_count != 0 || d->valid_ex != 1)
-		ft_error("Error!\nThere isn't valid way to go exit!!!\n", d);
+	return (1);
+}
+
+static void	check_path(t_data *m, int x, int y)
+{
+	char	*p;
+
+	p = &m->map->tmp_map[y][x];
+	if (*p == 'E')
+		m->map->tmp_exit = 1;
+	if (*p != '1')
+	{
+		if (*p == 'C')
+			m->map->tmp_items--;
+		*p = 'V';
+		if (m->map->tmp_map[y][x + 1] != '1' &&
+			m->map->tmp_map[y][x + 1] != 'V')
+			check_path(m, x + 1, y);
+		if (m->map->tmp_map[y][x - 1] != '1' &&
+			m->map->tmp_map[y][x - 1] != 'V')
+			check_path(m, x - 1, y);
+		if (m->map->tmp_map[y - 1][x] != '1' &&
+			m->map->tmp_map[y - 1][x] != 'V')
+			check_path(m, x, y - 1);
+		if (m->map->tmp_map[y + 1][x] != '1' &&
+			m->map->tmp_map[y + 1][x] != 'V')
+			check_path(m, x, y + 1);
+	}
+}
+
+int	valid_path(t_data *m)
+{
+	check_path(m, m->map->play_x, m->map->play_y);
+	free_strs(m->map->tmp_map);
+	m->map->tmp_map = NULL;
+	if (m->map->tmp_items != 0 || m->map->tmp_exit != 1)
+		return (0);
+	return (1);
 }
