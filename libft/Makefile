@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 16:08:43 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/03 11:28:13 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/10 20:06:07 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ fclean:	clean
 re:	fclean all
 
 norme:
-	norminette $(SRC) $(INC_PATH)libft.h
+	norminette $(SRC_PATH) $(INC_PATH)libft.h
 
 .PHONY:	all clean fclean re norme
 

@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/10 20:02:46 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/10 20:09:51 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,6 +131,8 @@ check:
 	echo "$(GREEN)[ ✔ ]$(WHITE)	Norme"
 	@ls $(LIB_PATH) | grep -q $(LIB_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Libft" ||\
 	echo "$(RED)[ ✗ ]$(BLUE)	Libft"
+	@ls $(MLX_PATH) | grep -q $(MLX_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Minilibx" ||\
+	echo "$(RED)[ ✗ ]$(BLUE)	Minilibx"
 
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
@@ -216,7 +218,7 @@ tests: header $(NAME)
 		echo "\n$(GREEN)[ ✔ ] TEST NOT VALID PATH$(WHITE)\n\n"; \
     fi
 
-.PHONY:	all clean fclean re bonus norme check
+.PHONY:	all clean fclean re bonus norme check test tests
 
 #Colors
 DEF_COLOR = \033[0;39m

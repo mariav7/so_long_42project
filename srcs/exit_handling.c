@@ -6,13 +6,13 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 16:24:23 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:11:50 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    basic_error_message(char *err, void *truc)
+void	basic_error_message(char *err, void *truc)
 {
 	if (truc)
 		free(truc);
@@ -21,13 +21,14 @@ void    basic_error_message(char *err, void *truc)
 	exit(EXIT_FAILURE);
 }
 
-void    error_message_n_exit(char *err)
+void	error_message_n_exit(char *err)
 {
 	ft_putendl_fd(ERR, 2);
 	perror(err);
 	exit(EXIT_FAILURE);
 }
 
+//error_message_n_exit(err);
 void	error_exit(t_data *d, char *err)
 {
 	if (d->map->map)
@@ -42,7 +43,6 @@ void	error_exit(t_data *d, char *err)
 		free(d->mlx_ptr);
 	}
 	basic_error_message(err, NULL);
-	//error_message_n_exit(err);
 }
 
 void	free_strs(char	**strs)
@@ -59,13 +59,13 @@ void	free_strs(char	**strs)
 	strs = NULL;
 }
 
+//	mlx_destroy_image(d->mlx, d->img.img);
 void	free_n_exit_safe(t_data *d)
 {
 	if (d->map->map)
 		free_strs(d->map->map);
 	if (d->map->tmp_map)
 		free_strs(d->map->tmp_map);
-//	mlx_destroy_image(d->mlx, d->img.img);
 	if (d->mlx_ptr)
 	{
 		if (d->window)
