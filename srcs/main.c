@@ -6,11 +6,58 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 21:25:05 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:00:32 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*int	ft_error(char *msg, t_data *data)
+{
+	ft_printf("%s", msg);
+	ft_free_all(data);
+	exit(EXIT_FAILURE);
+}
+
+int	ft_close_window(t_data *data)
+{
+	ft_free_mlx(data);
+	ft_free_all(data);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+void	ft_free_all(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->map1)
+		free(data->map1);
+	if (data->map2)
+	{
+		while (data->map2[i])
+		{
+			free(data->map2[i]);
+			i++;
+		}
+		free(data->map2);
+	}
+}
+
+void	ft_free_mlx(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->bgrnd);
+	mlx_destroy_image(data->mlx, data->food);
+	mlx_destroy_image(data->mlx, data->wall);
+	mlx_destroy_image(data->mlx, data->exit);
+	mlx_destroy_image(data->mlx, data->player_l);
+	mlx_destroy_image(data->mlx, data->player_r);
+	mlx_destroy_image(data->mlx, data->player_b);
+	mlx_destroy_image(data->mlx, data->player_f);
+	mlx_destroy_window(data->mlx, data->window);
+	free(data->mlx);
+}*/
 
 static void	info_usage(void)
 {
@@ -67,6 +114,10 @@ int	main(int argc, char **argv)
 	{
 		is_map_valid(&mlx);
 		mlx.mlx_ptr = mlx_init();
+/* 		ft_in_image(data);
+		mlx_hook(mlx.window, 2, 1L << 0, ft_key_event, mlx);
+		mlx_hook(mlx.window, 17, 1L << 2, ft_close_window, mlx);
+		mlx_loop(mlx.mlx_ptr); */
 		if (mlx.mlx_ptr == NULL)
 			error_exit(&mlx, ERR_MLX);
 		mlx.window = mlx_new_window(mlx.mlx_ptr, WIN_X, WIN_Y, TITLE);
@@ -77,8 +128,6 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(mlx.mlx_ptr, &handle_no_event, &mlx);
 		ft_control_keys(&mlx);
 		mlx_loop(mlx.mlx_ptr);
-		free_n_exit_safe(&mlx);
-		return (0);
 	}
 	else
 		error_exit(&mlx, ERR_PARS);
