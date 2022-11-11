@@ -6,14 +6,14 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/10 21:04:05 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/11 12:09:05 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # GENERAL
 NAME	= so_long
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -g -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
@@ -33,7 +33,7 @@ MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS)
 
 # SO_LONG
 SRCS_NAMES 	= main.c exit_handling.c key_hooks.c check_file.c get_map.c \
-			check_map.c check_map2.c
+			check_map.c check_map2.c render_map.c screen.c
 SRCS_PATH 	= ./srcs/
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
@@ -117,8 +117,11 @@ FNCTION		= $(shell ls -l $(LIB_PATH)/srcs | grep ft_ | sed 's/^.*ft_//' | sed 's
 FORBID		= printf $(FNCTION)
 FN1			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
-PATH_BADMAP	= ./maps/bad_maps/
-PATH_MAP	= ./maps/
+PATH_BADMAPS	= ./maps/bad_maps/
+PATH_MAPS	= ./maps/
+FLAGS_VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=3
+TEST = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_BADMAPS)
+TEST2 = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_MAPS)
 
 check:
 	@grep -qe ${USER} -e ${MAIL} srcs/* includes/* && \
@@ -137,16 +140,12 @@ check:
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
 	norminette $(SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
-#$(BONUS_SRCS_PATH)
-
-test = valgrind --leak-check=full --error-exitcode=3 ./$(NAME) $(PATH_BADMAP)
-test2 = valgrind --leak-check=full --error-exitcode=3 ./so_long ./maps/map1.ber;
 
 test: header $(NAME)
 	@echo "$(BLUE)TEST: NORMAL$(YELLOW)\n"
-	@cat $(PATH_MAP)map1.ber
+	@cat $(PATH_MAPS)map1.ber
 	@echo "$(WHITE)\n"
-	@if $(test2) then \
+	@if $(TEST2)map1.ber; then \
         echo "\n$(GREEN)[ ✔ ] TEST NORMAL$(WHITE)\n\n"; \
 	else \
 		echo "\n$(RED)[ ✗ ] TEST NORMAL$(WHITE)\n\n"; \
@@ -156,69 +155,69 @@ tests: header $(NAME)
 	@echo "\n$(YELLOW)... RUNNING ERROR TESTS ...$(WHITE)\n"
 
 	@echo "$(BLUE)TEST: INVALID FILE TYPE$(YELLOW)\n"
-	@cat $(PATH_BADMAP)invalid-file.txt
+	@cat $(PATH_BADMAPS)invalid-file.txt
 	@echo "$(WHITE)\n"
-	@if $(test)invalid-file.txt; then \
+	@if $(TEST)invalid-file.txt; then \
 		echo "\n$(RED)[ ✗ ] TEST INVALID FILE$(WHITE)\n\n"; \
 	else \
         echo "\n$(GREEN)[ ✔ ] TEST INVALID FILE$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: EMPTY MAP$(YELLOW)\n"
-	@cat $(PATH_BADMAP)emptymap.ber
+	@cat $(PATH_BADMAPS)emptymap.ber
 	@echo "$(WHITE)\n"
-	@if $(test)emptymap.ber; then \
+	@if $(TEST)emptymap.ber; then \
         echo "\n$(RED)[ ✗ ] TEST EMPTY MAP$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST EMPTY MAP$(WHITE)\n\n"; \
     fi
 	
 	@echo "$(BLUE)TEST: INVALID CHARACTERS$(YELLOW)\n"
-	@cat $(PATH_BADMAP)invalid-characters.ber
+	@cat $(PATH_BADMAPS)invalid-characters.ber
 	@echo "$(WHITE)\n"
-	@if $(test)invalid-characters.ber; then \
+	@if $(TEST)invalid-characters.ber; then \
         echo "\n$(RED)[ ✗ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: MIN. CHARACTERS$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-min-characters.ber
+	@cat $(PATH_BADMAPS)not-min-characters.ber
 	@echo "$(WHITE)\n"
-	@if $(test)not-min-characters.ber; then \
+	@if $(TEST)not-min-characters.ber; then \
         echo "\n$(RED)[ ✗ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: IS NOT RECTANGULAR$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-rectangular.ber
+	@cat $(PATH_BADMAPS)not-rectangular.ber
 	@echo "$(WHITE)\n"
-	@if $(test)not-rectangular.ber; then \
+	@if $(TEST)not-rectangular.ber; then \
         echo "\n$(RED)[ ✗ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: IS NOT WALLED$(YELLOW)\n"
-	@cat $(PATH_BADMAP)not-walled.ber
+	@cat $(PATH_BADMAPS)not-walled.ber
 	@echo "$(WHITE)\n"
-	@if $(test)not-walled.ber; then \
+	@if $(TEST)not-walled.ber; then \
         echo "\n$(RED)[ ✗ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
     fi
 
 	@echo "$(BLUE)TEST: INVALID PATH$(YELLOW)\n"
-	@cat $(PATH_BADMAP)invalid-path.ber
+	@cat $(PATH_BADMAPS)invalid-path.ber
 	@echo "$(WHITE)\n"
-	@if $(test)invalid-path.ber; then \
+	@if $(TEST)invalid-path.ber; then \
 		echo "\n$(RED)[ ✗ ] TEST INVALID PATH$(WHITE)\n\n"; \
 	else \
 		echo "\n$(GREEN)[ ✔ ] TEST INVALID PATH$(WHITE)\n\n"; \
     fi
 
-.PHONY:	all clean fclean re bonus norme check test tests
+.PHONY:	all clean fclean re header lib mlx bonus norme check test tests
 
 #Colors
 DEF_COLOR = \033[0;39m

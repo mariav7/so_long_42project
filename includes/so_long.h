@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 21:57:37 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:55:17 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,24 @@
 # define ERR_MAP5 "Map: invalid path"
 # define ERR_MLX "Minilibx"
 
+/* Other messages */
+# define WIN "Winner, winner chicken dinner!"
+
 /* Other macros */
 # define FILE_TYPE ".ber"
 # define TITLE "SO_LONG"
-# define WIN_X  800
-# define WIN_Y 550
 
+/* Textures */
+# define BACKG "./textures/background.xpm"
+# define PL_FE "./textures/player_f.xpm"
+# define PL_BE "./textures/player_b.xpm"
+# define PL_LE "./textures/player_l.xpm"
+# define PL_RE "./textures/player_r.xpm"
+# define EXIT "./textures/door.xpm"
+# define WAL "./textures/wall_4.xpm"
+# define FOODS "./textures/food_1.xpm"
+
+/* Key codes */
 # define LEFT 97
 # define RIGTH 100
 # define UP 119
@@ -55,6 +67,9 @@ typedef struct s_map
 	char	p;
 	char	wall;
 	char	space;
+	char	current_pos;
+	int		ex_y;
+	int		ex_x;
 	int		items;
 	int		tmp_items;
 	int		exit;
@@ -64,19 +79,34 @@ typedef struct s_map
 	int		play_x;
 	int		height;
 	int		width;
+	char	*move_count_screen;
+	int		move_count;
+	int		map_x;
+	int		map_y;
 }	t_map;
 
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*window;
+	void	*backg;
+	void	*player_f;
+	void	*player_b;
+	void	*player_r;
+	void	*player_l;
+	void	*food;
+	void	*exit;
+	void	*wall;
+	int		imgy;
+	int		imgx;
 	t_map	*map;
 }	t_data;
 
 /* main.c */
 
 /* key_hooks.c */
-void	ft_control_keys(t_data *d);
+//void	ft_control_keys(t_data *d);
+int		key_event(int key_code, t_data *d);
 
 /* exit_handling.c */
 void	basic_error_message(char *err, void *truc);
@@ -99,15 +129,15 @@ void	is_map_valid(t_data *m);
 int		is_walled(t_data *m);
 int		valid_path(t_data *m);
 
+/* render_map.c */
+int		check_move(t_data *d, int x, int y);
+void	render_after_move(t_data *d);
+
+/* screen.c */
+void	in_image(t_data *d);
+void	put_image(t_data *d);
+
 /*
-# define BACKG "./textures/background.xpm"
-# define PL_FE "./textures/player_f.xpm"
-# define PL_BE "./textures/player_b.xpm"
-# define PL_LE "./textures/player_l.xpm"
-# define PL_RE "./textures/player_r.xpm"
-# define EXIT "./textures/door.xpm"
-# define WAL "./textures/wall_4.xpm"
-# define FOODS "./textures/food_1.xpm"
 
 typedef struct s_data
 {

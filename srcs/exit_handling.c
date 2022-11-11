@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 20:11:50 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:57:49 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ void	free_strs(char	**strs)
 	}
 	free(strs);
 	strs = NULL;
+}
+
+void	ft_free_mlx(t_data *d)
+{
+	mlx_destroy_image(d->mlx_ptr, d->backg);
+	mlx_destroy_image(d->mlx_ptr, d->food);
+	mlx_destroy_image(d->mlx_ptr, d->wall);
+	mlx_destroy_image(d->mlx_ptr, d->exit);
+	mlx_destroy_image(d->mlx_ptr, d->player_l);
+	mlx_destroy_image(d->mlx_ptr, d->player_r);
+	mlx_destroy_image(d->mlx_ptr, d->player_b);
+	mlx_destroy_image(d->mlx_ptr, d->player_f);
+	mlx_destroy_window(d->mlx_ptr, d->window);
+	free(d->mlx_ptr);
 }
 
 //	mlx_destroy_image(d->mlx, d->img.img);

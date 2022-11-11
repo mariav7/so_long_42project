@@ -6,58 +6,17 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 22:00:32 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:02:34 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*int	ft_error(char *msg, t_data *data)
+static int	close_window(t_data *d)
 {
-	ft_printf("%s", msg);
-	ft_free_all(data);
-	exit(EXIT_FAILURE);
-}
-
-int	ft_close_window(t_data *data)
-{
-	ft_free_mlx(data);
-	ft_free_all(data);
-	exit(EXIT_SUCCESS);
+	free_n_exit_safe(d);
 	return (0);
 }
-
-void	ft_free_all(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->map1)
-		free(data->map1);
-	if (data->map2)
-	{
-		while (data->map2[i])
-		{
-			free(data->map2[i]);
-			i++;
-		}
-		free(data->map2);
-	}
-}
-
-void	ft_free_mlx(t_data *data)
-{
-	mlx_destroy_image(data->mlx, data->bgrnd);
-	mlx_destroy_image(data->mlx, data->food);
-	mlx_destroy_image(data->mlx, data->wall);
-	mlx_destroy_image(data->mlx, data->exit);
-	mlx_destroy_image(data->mlx, data->player_l);
-	mlx_destroy_image(data->mlx, data->player_r);
-	mlx_destroy_image(data->mlx, data->player_b);
-	mlx_destroy_image(data->mlx, data->player_f);
-	mlx_destroy_window(data->mlx, data->window);
-	free(data->mlx);
-}*/
 
 static void	info_usage(void)
 {
@@ -68,13 +27,6 @@ static void	info_usage(void)
 	ft_printf(" \033[1;94m'S'\033[0m");
 	ft_printf(" \033[1;95m'D'\033[0m\n");
 	ft_printf("\nTo quit, use:\t\033[1;91m'ESC'\033[0m\n\n");
-}
-
-static int	handle_no_event(void *data)
-{
-	(void)data;
-	//This function needs to exist, but it is useless for the moment
-	return (0);
 }
 
 static void	init_vars(t_data *d, t_map *m)
@@ -114,19 +66,12 @@ int	main(int argc, char **argv)
 	{
 		is_map_valid(&mlx);
 		mlx.mlx_ptr = mlx_init();
-/* 		ft_in_image(data);
-		mlx_hook(mlx.window, 2, 1L << 0, ft_key_event, mlx);
-		mlx_hook(mlx.window, 17, 1L << 2, ft_close_window, mlx);
-		mlx_loop(mlx.mlx_ptr); */
 		if (mlx.mlx_ptr == NULL)
 			error_exit(&mlx, ERR_MLX);
-		mlx.window = mlx_new_window(mlx.mlx_ptr, WIN_X, WIN_Y, TITLE);
-		if (mlx.window == NULL)
-			error_exit(&mlx, ERR_MLX);
 		info_usage();
-		mlx_pixel_put(mlx.mlx_ptr, mlx.window, 250, 250, 0xFFFFFF);
-		mlx_loop_hook(mlx.mlx_ptr, &handle_no_event, &mlx);
-		ft_control_keys(&mlx);
+		in_image(&mlx);
+		mlx_hook(mlx.window, 2, 1L << 0, key_event, &mlx);
+		mlx_hook(mlx.window, 17, 1L << 2, close_window, &mlx);
 		mlx_loop(mlx.mlx_ptr);
 	}
 	else
