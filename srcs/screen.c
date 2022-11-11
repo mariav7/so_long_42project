@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 15:51:58 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:46:01 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	in_image(t_data *d)
 			&d->imgx, &d->imgy);
 	d->backg = mlx_xpm_file_to_image(d->mlx_ptr, BACKG,
 			&d->imgx, &d->imgy);
-	d->food = mlx_xpm_file_to_image(d->mlx_ptr, FOODS,
+	d->item = mlx_xpm_file_to_image(d->mlx_ptr, ITEM,
 			&d->imgx, &d->imgy);
 	d->exit = mlx_xpm_file_to_image(d->mlx_ptr, EXIT,
 			&d->imgx, &d->imgy);
-	d->wall = mlx_xpm_file_to_image(d->mlx_ptr, WAL,
+	d->wall = mlx_xpm_file_to_image(d->mlx_ptr, WALL,
 			&d->imgx, &d->imgy);
 	if (!d->player_f || !d->player_b || !d->player_l || !d->player_r
-		|| !d->backg || !d->food || !d->exit || !d->wall)
+		|| !d->backg || !d->item || !d->exit || !d->wall)
 		error_exit(d, ERR_MLX);
 	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64, \
 		d->map->height * 64, TITLE);
@@ -92,7 +92,7 @@ void	put_image(t_data *d)
 		else if (d->map->map[y / 64][x / 64] == 'E')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->exit, x, y);
 		else if (d->map->map[y / 64][x / 64] == 'C')
-			mlx_put_image_to_window(d->mlx_ptr, d->window, d->food, x, y);
+			mlx_put_image_to_window(d->mlx_ptr, d->window, d->item, x, y);
 		else if (d->map->map[y / 64][x / 64] == 'P')
 			put_image_player(d, x, y);
 		xy_oper(&x, &y, d);

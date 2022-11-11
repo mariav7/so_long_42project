@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 15:52:25 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:45:35 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_vars(t_data *d, t_map *m)
 	d->player_b = NULL;
 	d->player_r = NULL;
 	d->player_l = NULL;
-	d->food = NULL;
+	d->item = NULL;
 	d->exit = NULL;
 	d->wall = NULL;
 	d->imgy = 0;

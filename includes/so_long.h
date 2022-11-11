@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 18:12:56 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:08:09 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,16 @@
 /* Other macros */
 # define FILE_TYPE ".ber"
 # define TITLE "SO_LONG"
-# define WIN_X 500
-# define WIN_Y 500
 
 /* Textures */
 # define BACKG "./textures/backg.xpm"
-# define PL_FE "./textures/player_f.xpm"
+# define PL_FE "./textures/link_f.xpm"
 # define PL_BE "./textures/player_b.xpm"
 # define PL_LE "./textures/player_l.xpm"
 # define PL_RE "./textures/player_r.xpm"
 # define EXIT "./textures/door.xpm"
-# define WAL "./textures/wall_4.xpm"
-# define FOODS "./textures/collectible.xpm"
+# define WALL "./textures/wall_4.xpm"
+# define ITEM "./textures/collectible.xpm"
 
 /* Key codes */
 # define LEFT 97
@@ -94,7 +92,7 @@ typedef struct s_data
 	void	*player_b;
 	void	*player_r;
 	void	*player_l;
-	void	*food;
+	void	*item;
 	void	*exit;
 	void	*wall;
 	int		imgy;
@@ -105,7 +103,6 @@ typedef struct s_data
 /* main.c */
 
 /* key_hooks.c */
-//void	ft_control_keys(t_data *d);
 int		key_event(int key_code, t_data *d);
 
 /* exit_handling.c */
@@ -120,7 +117,6 @@ void	check_file(char *file_line);
 
 /* get_map.c */
 void	get_map(t_data *m, char *fmap);
-//char	**get_map(char *map);
 
 /* check_map.c */
 void	is_map_valid(t_data *m);
@@ -136,40 +132,5 @@ void	render_after_move(t_data *d);
 /* screen.c */
 void	in_image(t_data *d);
 void	put_image(t_data *d);
-
-/*
-typedef struct s_data
-{
-	void	*mlx;
-	void	*bgrnd;
-	void	*window;
-	void	*player_f;
-	void	*player_b;
-	void	*player_r;
-	void	*player_l;
-	void	*food;
-	void	*exit;
-	void	*wall;
-	char	*move_count_screen;
-	int		move_count;
-	char	curr_pos;
-	int		imgy;
-	int		imgx;
-	char	*map1;
-	char	**map2;
-	char	**tmp_map2;
-	int		food_count;
-	int		exit_count;
-	int		player_count;
-	int		ply_x;
-	int		ply_y;
-	int		map_x;
-	int		map_y;
-	int		tmp_food_count;
-	int		valid_ex;
-	int		ex_y;
-	int		ex_x;
-}	t_data;
-*/
 
 #endif
