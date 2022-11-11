@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 12:02:21 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:51:58 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ void	in_image(t_data *d)
 			&d->imgx, &d->imgy);
 	d->wall = mlx_xpm_file_to_image(d->mlx_ptr, WAL,
 			&d->imgx, &d->imgy);
-	d->window = mlx_new_window(d->mlx_ptr, d->map->map_x * 64, \
-		d->map->map_y * 64, TITLE);
-	//if new window fails free all and exit error
-	//if (mlx.window == NULL)
-	//		error_exit(&mlx, ERR_MLX);
+	if (!d->player_f || !d->player_b || !d->player_l || !d->player_r
+		|| !d->backg || !d->food || !d->exit || !d->wall)
+		error_exit(d, ERR_MLX);
+	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64, \
+		d->map->height * 64, TITLE);
+	if (d->window == NULL)
+		error_exit(d, ERR_MLX);
 	d->map->current_pos = 'F';
 	put_image(d);
 }
 
 static void	xy_oper(int *x, int *y, t_data *d)
 {
-	if (*x == d->map->map_x * 64)
+	if (*x == d->map->width * 64)
 	{
 		*x = -64;
 		*y += 64;
@@ -78,7 +80,7 @@ void	put_image(t_data *d)
 
 	x = 0;
 	y = 0;
-	while (y < d->map->map_y * 64)
+	while (y < d->map->height * 64)
 	{
 		if (d->map->map[y / 64][x / 64] != '1'
 			&& d->map->map[y / 64][x / 64] != '0')

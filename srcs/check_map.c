@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 11:29:38 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:10:56 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ static int	valid_characters(t_data *m)
 	return (1);
 }
 
+static void	count_exit(t_data *m, int y, int x)
+{
+	m->map->exit++;
+	m->map->ex_y = y;
+	m->map->ex_x = x;
+}
+
 static void	count_characters(t_data *m)
 {
 	int	y;
@@ -50,7 +57,7 @@ static void	count_characters(t_data *m)
 			if (m->map->map[y][x] == m->map->c)
 				m->map->items++;
 			else if (m->map->map[y][x] == m->map->e)
-				m->map->exit++;
+				count_exit(m, y, x);
 			else if (m->map->map[y][x] == m->map->p)
 			{
 				m->map->player++;

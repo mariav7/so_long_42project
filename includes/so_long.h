@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 11:55:17 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:12:56 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,18 @@
 /* Other macros */
 # define FILE_TYPE ".ber"
 # define TITLE "SO_LONG"
+# define WIN_X 500
+# define WIN_Y 500
 
 /* Textures */
-# define BACKG "./textures/background.xpm"
+# define BACKG "./textures/backg.xpm"
 # define PL_FE "./textures/player_f.xpm"
 # define PL_BE "./textures/player_b.xpm"
 # define PL_LE "./textures/player_l.xpm"
 # define PL_RE "./textures/player_r.xpm"
 # define EXIT "./textures/door.xpm"
 # define WAL "./textures/wall_4.xpm"
-# define FOODS "./textures/food_1.xpm"
+# define FOODS "./textures/collectible.xpm"
 
 /* Key codes */
 # define LEFT 97
@@ -81,8 +83,6 @@ typedef struct s_map
 	int		width;
 	char	*move_count_screen;
 	int		move_count;
-	int		map_x;
-	int		map_y;
 }	t_map;
 
 typedef struct s_data
@@ -138,7 +138,6 @@ void	in_image(t_data *d);
 void	put_image(t_data *d);
 
 /*
-
 typedef struct s_data
 {
 	void	*mlx;
@@ -171,30 +170,6 @@ typedef struct s_data
 	int		ex_y;
 	int		ex_x;
 }	t_data;
-
-int		ft_error(char *msg, t_data *data);
-void	ft_free_all(t_data *data);
-void	ft_check_ber(char *map, t_data *data);
-void	ft_get_map(t_data *data, char *map);
-void	ft_check_map(t_data *data);
-void	ft_check_num_fe(t_data *data);
-void	ft_check_rectan(t_data *data);
-void	ft_check_wall(t_data *data);
-void	ft_check_other_walls(t_data *data);
-void	ft_check_validmap(t_data *data, int x, int y);
-void	ft_check_path(t_data *data);
-void	ft_in_image(t_data *data);
-void	ft_put_image(t_data *data);
-void	ft_put_image_player(t_data *data, int x, int y);
-void	ft_xy_oper(int *x, int *y, t_data *data);
-void	ft_score(t_data *data);
-int		ft_key_event(int key, t_data *data);
-void	ft_check_up(int key, t_data *data);
-int		ft_check_mov(t_data *data, int x, int y);
-void	ft_render_after_move(t_data *data);
-void	ft_check_right(int key, t_data *data);
-void	ft_check_left(int key, t_data *data);
-void	ft_check_down(int key, t_data *data);
-void	ft_free_mlx(t_data *data);*/
+*/
 
 #endif

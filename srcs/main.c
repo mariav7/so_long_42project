@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 12:02:34 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:52:25 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ static void	init_vars(t_data *d, t_map *m)
 {
 	d->mlx_ptr = NULL;
 	d->window = NULL;
+	d->backg = NULL;
+	d->player_f = NULL;
+	d->player_b = NULL;
+	d->player_r = NULL;
+	d->player_l = NULL;
+	d->food = NULL;
+	d->exit = NULL;
+	d->wall = NULL;
+	d->imgy = 0;
+	d->imgx = 0;
 	d->map = m;
 	d->map->map = NULL;
 	d->map->tmp_map = NULL;
@@ -41,6 +51,9 @@ static void	init_vars(t_data *d, t_map *m)
 	d->map->p = 'P';
 	d->map->wall = '1';
 	d->map->space = '0';
+	d->map->current_pos = 'F';
+	d->map->ex_y = 0;
+	d->map->ex_x = 0;
 	d->map->items = 0;
 	d->map->tmp_items = 0;
 	d->map->exit = 0;
@@ -50,6 +63,8 @@ static void	init_vars(t_data *d, t_map *m)
 	d->map->play_x = 0;
 	d->map->height = 0;
 	d->map->width = 0;
+	d->map->move_count_screen = NULL;
+	d->map->move_count = 0;
 }
 
 int	main(int argc, char **argv)
@@ -57,7 +72,7 @@ int	main(int argc, char **argv)
 	t_data	mlx;
 	t_map	fmap;
 
-	if (argc <= 1 || argc >= 3)
+	if (argc != 2)
 		basic_error_message(ERR_USAGE, NULL);
 	check_file(argv[1]);
 	init_vars(&mlx, &fmap);

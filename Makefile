@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/11 12:09:05 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/11 14:40:55 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,7 @@ FN1			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
 PATH_BADMAPS	= ./maps/bad_maps/
 PATH_MAPS	= ./maps/
-FLAGS_VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=3
+FLAGS_VALGRIND = valgrind --leak-check=full --error-exitcode=3
 TEST = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_BADMAPS)
 TEST2 = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_MAPS)
 
