@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 12:13:06 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/12 13:26:08 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 /* Error messages */
 # define ERR "\033[1;31mError \033[0m"
+# define ERR_CALLOC "Calloc: in structures"
 # define ERR_USAGE "Usage: ./so_long [file.ber]"
 # define ERR_FILE "File: invalid file type, [.ber] needed"
 # define ERR_FILE2 "File"
@@ -106,9 +107,9 @@ typedef struct s_data
 int		key_event(int key_code, t_data *d);
 
 /* exit_handling.c */
-void	basic_error_message(char *err, void *truc);
-void	error_message_n_exit(char *err);
-void	error_exit(t_data *d, char *err);
+void	basic_error_message(char *err, void *free_this);
+void	error_message_n_exit(char *err, t_data *d);
+void	error_exit(t_data *d, char *err, void *free_this);
 void	free_strs(char	**strs);
 void	free_n_exit_safe(t_data *d);
 

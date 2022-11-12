@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 15:10:56 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/12 12:56:49 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ static int	is_rectangular(t_data *m)
 void	is_map_valid(t_data *m)
 {
 	if (!valid_characters(m))
-		error_exit(m, ERR_MAP);
+		error_exit(m, ERR_MAP, NULL);
 	if (!min_characters(m))
-		error_exit(m, ERR_MAP2);
+		error_exit(m, ERR_MAP2, NULL);
 	if (!is_rectangular(m))
-		error_exit(m, ERR_MAP3);
+		error_exit(m, ERR_MAP3, NULL);
 	if (!is_walled(m))
-		error_exit(m, ERR_MAP4);
+		error_exit(m, ERR_MAP4, NULL);
 	if (!valid_path(m))
-		error_exit(m, ERR_MAP5);
+		error_exit(m, ERR_MAP5, NULL);
 }

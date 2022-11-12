@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 18:46:01 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/12 12:57:25 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	in_image(t_data *d)
 			&d->imgx, &d->imgy);
 	if (!d->player_f || !d->player_b || !d->player_l || !d->player_r
 		|| !d->backg || !d->item || !d->exit || !d->wall)
-		error_exit(d, ERR_MLX);
+		error_exit(d, ERR_MLX, NULL);
 	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64, \
 		d->map->height * 64, TITLE);
 	if (d->window == NULL)
-		error_exit(d, ERR_MLX);
+		error_exit(d, ERR_MLX, NULL);
 	d->map->current_pos = 'F';
 	put_image(d);
 }

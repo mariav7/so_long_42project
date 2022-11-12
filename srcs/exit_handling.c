@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 18:45:27 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/12 13:02:52 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,28 @@ static void	free_mlx_images(t_data *d)
 		mlx_destroy_image(d->mlx_ptr, d->player_f);
 }
 
-void	basic_error_message(char *err, void *truc)
+void	basic_error_message(char *err, void *free_this)
 {
-	if (truc)
-		free(truc);
+	if (free_this)
+		free(free_this);
 	ft_putendl_fd(ERR, 2);
 	ft_putendl_fd(err, 2);
 	exit(EXIT_FAILURE);
 }
 
-void	error_message_n_exit(char *err)
+void	error_message_n_exit(char *err, t_data *d)
 {
+	if (d)
+	{
+		free(d->map);
+		free(d);
+	}
 	ft_putendl_fd(ERR, 2);
 	perror(err);
 	exit(EXIT_FAILURE);
 }
 
-void	error_exit(t_data *d, char *err)
+void	error_exit(t_data *d, char *err, void *free_this)
 {
 	if (d->map->map)
 		free_strs(d->map->map);
@@ -64,7 +69,9 @@ void	error_exit(t_data *d, char *err)
 		mlx_destroy_display(d->mlx_ptr);
 		free(d->mlx_ptr);
 	}
-	basic_error_message(err, NULL);
+	free(d->map);
+	free(d);
+	basic_error_message(err, free_this);
 }
 
 void	free_strs(char	**strs)
@@ -97,5 +104,7 @@ void	free_n_exit_safe(t_data *d)
 		mlx_destroy_display(d->mlx_ptr);
 		free(d->mlx_ptr);
 	}
+	free(d->map);
+	free(d);
 	exit(EXIT_SUCCESS);
 }
