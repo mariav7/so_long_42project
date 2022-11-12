@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/11 14:40:55 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/12 12:22:12 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,14 +141,34 @@ norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
 	norminette $(SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
 
-test: header $(NAME)
-	@echo "$(BLUE)TEST: NORMAL$(YELLOW)\n"
+map1: header $(NAME)
+	@echo "$(BLUE)TEST: MAP 1$(YELLOW)\n"
 	@cat $(PATH_MAPS)map1.ber
 	@echo "$(WHITE)\n"
 	@if $(TEST2)map1.ber; then \
-        echo "\n$(GREEN)[ ✔ ] TEST NORMAL$(WHITE)\n\n"; \
+        echo "\n$(GREEN)[ ✔ ] TEST MAP 1$(WHITE)\n\n"; \
 	else \
-		echo "\n$(RED)[ ✗ ] TEST NORMAL$(WHITE)\n\n"; \
+		echo "\n$(RED)[ ✗ ] TEST MAP 1$(WHITE)\n\n"; \
+    fi
+
+map2: header $(NAME)
+	@echo "$(BLUE)TEST: MAP 2$(YELLOW)\n"
+	@cat $(PATH_MAPS)map2.ber
+	@echo "$(WHITE)\n"
+	@if $(TEST2)map2.ber; then \
+        echo "\n$(GREEN)[ ✔ ] TEST MAP 2$(WHITE)\n\n"; \
+	else \
+		echo "\n$(RED)[ ✗ ] TEST MAP 2$(WHITE)\n\n"; \
+    fi
+
+map3: header $(NAME)
+	@echo "$(BLUE)TEST: MAP 3$(YELLOW)\n"
+	@cat $(PATH_MAPS)map3.ber
+	@echo "$(WHITE)\n"
+	@if $(TEST2)map3.ber; then \
+        echo "\n$(GREEN)[ ✔ ] TEST MAP 3$(WHITE)\n\n"; \
+	else \
+		echo "\n$(RED)[ ✗ ] TEST MAP 3$(WHITE)\n\n"; \
     fi
 
 tests: header $(NAME)
