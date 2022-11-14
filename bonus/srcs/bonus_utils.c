@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   bonus_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 13:05:38 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:46:51 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:20:48 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
+
+void	info_usage(void)
+{
+	ft_printf("\n\033[1;92mSO_LONG - INFO\033[0m\n\n");
+	ft_printf("To move, use:\t");
+	ft_printf("    \033[1;96m'W'\033[0m\n");
+	ft_printf("\t\t\033[1;93m'A'\033[0m");
+	ft_printf(" \033[1;94m'S'\033[0m");
+	ft_printf(" \033[1;95m'D'\033[0m\n");
+	ft_printf("\nTo quit, use:\t\033[1;91m'ESC'\033[0m" );
+	ft_printf("  or click on \033[1;91m'X'\033[0m\n\n");
+}
 
 void	init_structs(t_data **d, t_map **m)
 {

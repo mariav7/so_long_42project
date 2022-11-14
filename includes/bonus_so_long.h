@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   bonus_so_long.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:47:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:19:45 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef BONUS_SO_LONG_H
+# define BONUS_SO_LONG_H
 
 /* My libs */
 # include <libft.h>
@@ -83,6 +83,7 @@ typedef struct s_map
 	int		play_x;
 	int		height;
 	int		width;
+	char	*move_count_screen;
 	int		move_count;
 }	t_map;
 
@@ -91,6 +92,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*window;
 	void	*backg;
+	void	*score_backg;
 	void	*player_f;
 	void	*player_b;
 	void	*player_r;
@@ -136,6 +138,7 @@ void	error_exit(t_data *d, char *err, void *free_this);
 void	free_n_exit_safe(t_data *d);
 
 /* utils.c */
+void	info_usage(void);
 void	init_structs(t_data **d, t_map **m);
 int		close_window(t_data *d);
 void	free_strs(char	**strs);

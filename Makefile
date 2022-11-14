@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/14 13:15:25 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/14 15:53:04 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,10 @@ OBJS_PATH 	= ./objs/
 OBJS		= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
 
 # SO_LONG BONUS
-BONUS_SRCS_NAMES 	= so_long_bonus.c
+BONUS_SRCS_NAMES 	= bonus_main.c bonus_exit_handling.c bonus_key_hooks.c \
+					bonus_check_file.c bonus_get_map.c bonus_check_map.c \
+					bonus_check_map2.c bonus_render_map.c bonus_screen.c \
+					bonus_utils.c
 BONUS_SRCS_PATH 	= ./bonus/srcs/
 BONUS_SRCS			= $(addprefix $(BONUS_SRCS_PATH), $(BONUS_SRCS_NAMES))
 BONUS_OBJS_NAMES	= $(BONUS_SRCS_NAMES:.c=.o)
@@ -60,10 +63,10 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir -p $(OBJS_PATH)
 	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
 
-#$(BONUS_OBJS_PATH)%.o: $(BONUS_SRCS_PATH)%.c
-#	@mkdir -p $(BONUS_OBJS_PATH)
-#	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) $(NAME) bonus\n"
-#	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
+$(BONUS_OBJS_PATH)%.o: $(BONUS_SRCS_PATH)%.c
+	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) bonus $(NAME)\n"
+	@mkdir -p $(BONUS_OBJS_PATH)
+	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
 
 lib:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH)
@@ -88,10 +91,10 @@ fclean:	clean
 	@$(RM) $(NAME)
 	@echo "$(GREEN)[ ✔ ][ ALL CLEANED ]$(WHITE)"
 
-#bonus:	lib mlx $(BONUS_OBJS)
-#		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) so_long bonus\n"
-#		@$(CC) $(FLAGS) $(BONUS_OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
-#		@echo "$(BLUE)[ ✔ ]$(CYAN)	SO_LONG BONUS READY"
+bonus:	lib mlx $(BONUS_OBJS)
+		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) bonus so_long\n"
+		@$(CC) $(FLAGS) $(BONUS_OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
+		@echo "$(BLUE)[ ✔ ]$(BLUE) BONUS SO_LONG READY$(WHITE)"
 
 re:	fclean all
 
@@ -139,7 +142,7 @@ check:
 
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
-	norminette $(SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
+	norminette $(SRCS_PATH) $(BONUS_SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
 
 map1: header $(NAME)
 	@echo "$(BLUE)TEST: MAP 1$(YELLOW)\n"
