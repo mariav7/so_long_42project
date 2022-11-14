@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/14 15:53:04 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/14 17:32:15 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ fclean:	clean
 	@$(RM) $(NAME)
 	@echo "$(GREEN)[ ✔ ][ ALL CLEANED ]$(WHITE)"
 
-bonus:	lib mlx $(BONUS_OBJS)
+bonus:	header lib mlx $(BONUS_OBJS)
 		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) bonus so_long\n"
 		@$(CC) $(FLAGS) $(BONUS_OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
 		@echo "$(BLUE)[ ✔ ]$(BLUE) BONUS SO_LONG READY$(WHITE)"

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:19:45 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:33:56 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,18 @@
 /* Textures */
 # define BACKG "./textures/backg.xpm"
 # define SCORE_BACKG "./textures/score-backg.xpm"
-# define PL_FE "./textures/player_f.xpm"
-# define PL_BE "./textures/player_b.xpm"
-# define PL_LE "./textures/player_l.xpm"
-# define PL_RE "./textures/player_r.xpm"
-# define EXIT "./textures/door_closed.xpm"
+# define PL_F "./textures/player_f.xpm"
+# define PL_FF "./textures/player_ff.xpm"
+# define PL_B "./textures/player_b.xpm"
+# define PL_BB "./textures/player_bb.xpm"
+# define PL_L "./textures/player_l.xpm"
+# define PL_LL "./textures/player_ll.xpm"
+# define PL_R "./textures/player_r.xpm"
+# define PL_RR "./textures/player_rr.xpm"
+# define EXIT_O "./textures/door-open.xpm"
+# define EXIT_C "./textures/door-closed.xpm"
 # define WALL "./textures/wall.xpm"
+# define OBST "./textures/obstacle.xpm"
 # define ITEM "./textures/item.xpm"
 
 /* Key codes */
@@ -94,12 +100,19 @@ typedef struct s_data
 	void	*backg;
 	void	*score_backg;
 	void	*player_f;
+	void	*player_ff;
 	void	*player_b;
+	void	*player_bb;
 	void	*player_r;
+	void	*player_rr;
 	void	*player_l;
+	void	*player_ll;
 	void	*item;
-	void	*exit;
+	void	*exit_c;
+	void	*exit_o;
 	void	*wall;
+	void	*obst;
+	int		anim;
 	int		imgy;
 	int		imgx;
 	t_map	*map;
@@ -143,5 +156,7 @@ void	init_structs(t_data **d, t_map **m);
 int		close_window(t_data *d);
 void	free_strs(char	**strs);
 void	count_exit(t_data *m, int y, int x);
+
+void	score(t_data *d);
 
 #endif

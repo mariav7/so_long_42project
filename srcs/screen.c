@@ -6,13 +6,13 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:37:45 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:38:29 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	xy_oper(int *x, int *y, t_data *d)
+static void	xy_counter(int *x, int *y, t_data *d)
 {
 	if (*x == d->map->width * 64)
 	{
@@ -56,19 +56,19 @@ void	put_image(t_data *d)
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->item, x, y);
 		else if (d->map->map[y / 64][x / 64] == 'P')
 			put_image_player(d, x, y);
-		xy_oper(&x, &y, d);
+		xy_counter(&x, &y, d);
 	}
 }
 
 void	in_image(t_data *d)
 {
-	d->player_f = mlx_xpm_file_to_image(d->mlx_ptr, PL_FE,
+	d->player_f = mlx_xpm_file_to_image(d->mlx_ptr, PL_F,
 			&d->imgx, &d->imgy);
-	d->player_b = mlx_xpm_file_to_image(d->mlx_ptr, PL_BE,
+	d->player_b = mlx_xpm_file_to_image(d->mlx_ptr, PL_B,
 			&d->imgx, &d->imgy);
-	d->player_l = mlx_xpm_file_to_image(d->mlx_ptr, PL_LE,
+	d->player_l = mlx_xpm_file_to_image(d->mlx_ptr, PL_L,
 			&d->imgx, &d->imgy);
-	d->player_r = mlx_xpm_file_to_image(d->mlx_ptr, PL_RE,
+	d->player_r = mlx_xpm_file_to_image(d->mlx_ptr, PL_R,
 			&d->imgx, &d->imgy);
 	d->backg = mlx_xpm_file_to_image(d->mlx_ptr, BACKG,
 			&d->imgx, &d->imgy);

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:47:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:34:02 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@
 /* Textures */
 # define BACKG "./textures/backg.xpm"
 # define SCORE_BACKG "./textures/score-backg.xpm"
-# define PL_FE "./textures/player_f.xpm"
-# define PL_BE "./textures/player_b.xpm"
-# define PL_LE "./textures/player_l.xpm"
-# define PL_RE "./textures/player_r.xpm"
-# define EXIT "./textures/door_closed.xpm"
+# define PL_F "./textures/player_f.xpm"
+# define PL_B "./textures/player_b.xpm"
+# define PL_L "./textures/player_l.xpm"
+# define PL_R "./textures/player_r.xpm"
+# define EXIT "./textures/door-closed.xpm"
 # define WALL "./textures/wall.xpm"
 # define ITEM "./textures/item.xpm"
 

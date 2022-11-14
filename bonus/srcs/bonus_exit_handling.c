@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:20:30 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:24:17 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,28 @@ void	free_mlx_images(t_data *d)
 		mlx_destroy_image(d->mlx_ptr, d->item);
 	if (d->wall)
 		mlx_destroy_image(d->mlx_ptr, d->wall);
-	if (d->exit)
-		mlx_destroy_image(d->mlx_ptr, d->exit);
+	if (d->obst)
+		mlx_destroy_image(d->mlx_ptr, d->obst);
+	if (d->exit_o)
+		mlx_destroy_image(d->mlx_ptr, d->exit_o);
+	if (d->exit_c)
+		mlx_destroy_image(d->mlx_ptr, d->exit_c);
 	if (d->player_l)
 		mlx_destroy_image(d->mlx_ptr, d->player_l);
+	if (d->player_ll)
+		mlx_destroy_image(d->mlx_ptr, d->player_ll);
 	if (d->player_r)
 		mlx_destroy_image(d->mlx_ptr, d->player_r);
+	if (d->player_rr)
+		mlx_destroy_image(d->mlx_ptr, d->player_rr);
 	if (d->player_b)
 		mlx_destroy_image(d->mlx_ptr, d->player_b);
+	if (d->player_bb)
+		mlx_destroy_image(d->mlx_ptr, d->player_bb);
 	if (d->player_f)
 		mlx_destroy_image(d->mlx_ptr, d->player_f);
+	if (d->player_ff)
+		mlx_destroy_image(d->mlx_ptr, d->player_ff);
 }
 
 void	basic_error_message(char *err, void *free_this)

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 13:05:38 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:20:48 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:52:56 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_structs(t_data **d, t_map **m)
 	(*d)->map->wall = '1';
 	(*d)->map->space = '0';
 	(*d)->map->current_pos = 'F';
+	(*d)->anim = 0;
 }
 
 int	close_window(t_data *d)
