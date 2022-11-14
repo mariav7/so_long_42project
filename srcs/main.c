@@ -6,17 +6,11 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 13:39:58 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:09:49 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static int	close_window(t_data *d)
-{
-	free_n_exit_safe(d);
-	return (0);
-}
 
 static void	info_usage(void)
 {
@@ -45,6 +39,12 @@ static void	init_structs(t_data **d, t_map **m)
 	(*d)->map->wall = '1';
 	(*d)->map->space = '0';
 	(*d)->map->current_pos = 'F';
+}
+
+static int	close_window(t_data *d)
+{
+	free_n_exit_safe(d);
+	return (0);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/11 11:49:15 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:11:59 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	check_move(t_data *d, int x, int y)
 			d->map->items--;
 		else if (d->map->items == 0 && d->map->map[y][x] == 'E')
 		{
-			ft_putendl_fd(WIN, 1);
 			ft_printf("Move: %d\n", ++(d->map->move_count));
+			ft_putendl_fd(WIN, 1);
 			free_n_exit_safe(d);
 		}
 		else if (d->map->map[y][x] == 'E' && d->map->items != 0)

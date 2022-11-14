@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 13:26:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:41:57 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 
 /* Textures */
 # define BACKG "./textures/backg.xpm"
+# define SCORE_BACKG "./textures/score-backg.xpm"
 # define PL_FE "./textures/player_f.xpm"
 # define PL_BE "./textures/player_b.xpm"
 # define PL_LE "./textures/player_l.xpm"
@@ -89,6 +90,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*window;
 	void	*backg;
+	void	*score_backg;
 	void	*player_f;
 	void	*player_b;
 	void	*player_r;

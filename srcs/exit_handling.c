@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 13:02:52 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:44:18 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	free_mlx_images(t_data *d)
 {
 	if (d->backg)
 		mlx_destroy_image(d->mlx_ptr, d->backg);
+	if (d->score_backg)
+		mlx_destroy_image(d->mlx_ptr, d->score_backg);
 	if (d->item)
 		mlx_destroy_image(d->mlx_ptr, d->item);
 	if (d->wall)

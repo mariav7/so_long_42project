@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 12:57:25 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:05:33 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	in_image(t_data *d)
 			&d->imgx, &d->imgy);
 	d->backg = mlx_xpm_file_to_image(d->mlx_ptr, BACKG,
 			&d->imgx, &d->imgy);
+	d->score_backg = mlx_xpm_file_to_image(d->mlx_ptr, SCORE_BACKG,
+			&d->imgx, &d->imgy);
 	d->item = mlx_xpm_file_to_image(d->mlx_ptr, ITEM,
 			&d->imgx, &d->imgy);
 	d->exit = mlx_xpm_file_to_image(d->mlx_ptr, EXIT,
@@ -31,9 +33,9 @@ void	in_image(t_data *d)
 	d->wall = mlx_xpm_file_to_image(d->mlx_ptr, WALL,
 			&d->imgx, &d->imgy);
 	if (!d->player_f || !d->player_b || !d->player_l || !d->player_r
-		|| !d->backg || !d->item || !d->exit || !d->wall)
+		|| !d->backg || !d->score_backg || !d->item || !d->exit || !d->wall)
 		error_exit(d, ERR_MLX, NULL);
-	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64, \
+	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64,
 		d->map->height * 64, TITLE);
 	if (d->window == NULL)
 		error_exit(d, ERR_MLX, NULL);
@@ -65,10 +67,11 @@ static void	put_image_player(t_data *d, int x, int y)
 
 static void	score(t_data *d)
 {
+	mlx_put_image_to_window(d->mlx_ptr, d->window, d->score_backg, 0, (d->map->height * 64) - 35);
 	d->map->move_count_screen = ft_itoa(d->map->move_count);
-	mlx_string_put(d->mlx_ptr, d->window, 30, 30, 0xFFFFFF, \
+	mlx_string_put(d->mlx_ptr, d->window, 10, (d->map->height * 64) - 15, 0xFFFFFF,
 	"Move: ");
-	mlx_string_put(d->mlx_ptr, d->window, 65, 30, 0xFFFFFF, \
+	mlx_string_put(d->mlx_ptr, d->window, 45, (d->map->height * 64) - 15, 0xFFFFFF,
 		d->map->move_count_screen);
 	free(d->map->move_count_screen);
 }
