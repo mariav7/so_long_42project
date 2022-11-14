@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:06:01 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:20:35 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 22:06:26 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ static void	go_right(t_data *d)
 
 int	key_event(int key_code, t_data *d)
 {
-	if (key_code == LEFT)
+	if (key_code == LEFT || key_code == LEFT2)
 		go_left(d);
-	else if (key_code == RIGTH)
+	else if (key_code == RIGHT || key_code == RIGHT2)
 		go_right(d);
-	else if (key_code == UP)
+	else if (key_code == UP || key_code == UP2)
 		go_up(d);
-	else if (key_code == DOWN)
+	else if (key_code == DOWN || key_code == DOWN2)
 		go_down(d);
 	else if (key_code == ESCAPE)
 		free_n_exit_safe(d);

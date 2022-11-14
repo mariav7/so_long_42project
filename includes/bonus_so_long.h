@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 19:33:56 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 22:06:35 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,13 @@
 
 /* Key codes */
 # define LEFT 97
-# define RIGTH 100
+# define LEFT2 0xff51
+# define RIGHT 100
+# define RIGHT2 0xff53
 # define UP 119
+# define UP2 0xff52
 # define DOWN 115
+# define DOWN2 0xff54
 # define ESCAPE 65307
 
 /* STRUCTURES */
