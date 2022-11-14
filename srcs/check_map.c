@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:32:14 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/12 12:56:49 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:07:16 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ static int	valid_characters(t_data *m)
 		y++;
 	}
 	return (1);
-}
-
-static void	count_exit(t_data *m, int y, int x)
-{
-	m->map->exit++;
-	m->map->ex_y = y;
-	m->map->ex_x = x;
 }
 
 static void	count_characters(t_data *m)

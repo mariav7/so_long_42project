@@ -6,11 +6,22 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 10:11:59 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:57:30 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	start_game(t_data *d)
+{
+	in_image(d);
+	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64,
+			d->map->height * 64, TITLE);
+	if (d->window == NULL)
+		error_exit(d, ERR_MLX_WIN, NULL);
+	d->map->current_pos = 'F';
+	put_image(d);
+}
 
 int	check_move(t_data *d, int x, int y)
 {

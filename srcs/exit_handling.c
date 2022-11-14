@@ -6,13 +6,13 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 11:44:18 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:46:11 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	free_mlx_images(t_data *d)
+void	free_mlx_images(t_data *d)
 {
 	if (d->backg)
 		mlx_destroy_image(d->mlx_ptr, d->backg);
@@ -74,20 +74,6 @@ void	error_exit(t_data *d, char *err, void *free_this)
 	free(d->map);
 	free(d);
 	basic_error_message(err, free_this);
-}
-
-void	free_strs(char	**strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-	strs = NULL;
 }
 
 void	free_n_exit_safe(t_data *d)
