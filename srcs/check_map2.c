@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:56:08 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 11:46:08 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:07:37 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ static void	check_path(t_data *m, int y, int x)
 		*p = 'V';
 		if (m->map->tmp_map[y][x + 1] != '1' &&
 			m->map->tmp_map[y][x + 1] != 'V')
-			check_path(m, x + 1, y);
+			check_path(m, y, x + 1);
 		if (m->map->tmp_map[y][x - 1] != '1' &&
 			m->map->tmp_map[y][x - 1] != 'V')
-			check_path(m, x - 1, y);
+			check_path(m, y, x - 1);
 		if (m->map->tmp_map[y - 1][x] != '1' &&
 			m->map->tmp_map[y - 1][x] != 'V')
-			check_path(m, x, y - 1);
+			check_path(m, y - 1, x);
 		if (m->map->tmp_map[y + 1][x] != '1' &&
 			m->map->tmp_map[y + 1][x] != 'V')
-			check_path(m, x, y + 1);
+			check_path(m, y + 1, x);
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/15 12:00:34 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/15 12:09:37 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,7 +144,7 @@ norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
 	norminette $(SRCS_PATH) $(BONUS_SRCS_PATH) ./includes/
 
-map1: header $(NAME)
+test1: header $(NAME)
 	@echo "$(BLUE)TEST: MAP 1$(YELLOW)\n"
 	@cat $(PATH_MAPS)map1.ber
 	@echo "$(WHITE)\n"
@@ -154,7 +154,7 @@ map1: header $(NAME)
 		echo "\n$(RED)[ ✗ ] TEST MAP 1$(WHITE)\n\n"; \
     fi
 
-map2: header $(NAME)
+test2: header $(NAME)
 	@echo "$(BLUE)TEST: MAP 2$(YELLOW)\n"
 	@cat $(PATH_MAPS)map2.ber
 	@echo "$(WHITE)\n"
@@ -164,7 +164,7 @@ map2: header $(NAME)
 		echo "\n$(RED)[ ✗ ] TEST MAP 2$(WHITE)\n\n"; \
     fi
 
-map3: header $(NAME)
+test3: header $(NAME)
 	@echo "$(BLUE)TEST: MAP 3$(YELLOW)\n"
 	@cat $(PATH_MAPS)map3.ber
 	@echo "$(WHITE)\n"
@@ -174,7 +174,7 @@ map3: header $(NAME)
 		echo "\n$(RED)[ ✗ ] TEST MAP 3$(WHITE)\n\n"; \
     fi
 
-tests: header $(NAME)
+errortests: header $(NAME)
 	@echo "\n$(YELLOW)... RUNNING ERROR TESTS ...$(WHITE)\n"
 
 	@echo "$(BLUE)TEST: INVALID FILE TYPE$(YELLOW)\n"
@@ -240,7 +240,7 @@ tests: header $(NAME)
 		echo "\n$(GREEN)[ ✔ ] TEST INVALID PATH$(WHITE)\n\n"; \
     fi
 
-.PHONY:	all clean fclean re header lib mlx bonus norme check test tests
+.PHONY:	all clean fclean re header lib mlx bonus norme check test1 test2 test3 errortests
 
 #Colors
 DEF_COLOR = \033[0;39m
