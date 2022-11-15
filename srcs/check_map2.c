@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:56:08 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/10 19:52:48 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:46:08 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_walled(t_data *m)
 	return (1);
 }
 
-static void	check_path(t_data *m, int x, int y)
+static void	check_path(t_data *m, int y, int x)
 {
 	char	*p;
 
@@ -84,7 +84,7 @@ static void	check_path(t_data *m, int x, int y)
 
 int	valid_path(t_data *m)
 {
-	check_path(m, m->map->play_x, m->map->play_y);
+	check_path(m, m->map->play_y, m->map->play_x);
 	free_strs(m->map->tmp_map);
 	m->map->tmp_map = NULL;
 	if (m->map->tmp_items != 0 || m->map->tmp_exit != 1)
