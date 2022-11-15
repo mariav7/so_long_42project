@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 11:23:45 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:08:16 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int		valid_path(t_data *m);
 
 /* render_map.c */
 void	init_game(t_data *d);
-int		check_move(t_data *d, int x, int y);
+int		check_move(t_data *d, int y, int x);
 void	render_after_move(t_data *d);
 
 /* screen.c */

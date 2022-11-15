@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 10:59:09 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:08:06 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_game(t_data *d)
 	put_images(d);
 }
 
-int	check_move(t_data *d, int x, int y)
+int	check_move(t_data *d, int y, int x)
 {
 	if (d->map->map[y][x] != '1')
 	{
