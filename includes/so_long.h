@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 19:34:02 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:36:57 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 
 /* Textures */
 # define BACKG "./textures/backg.xpm"
-# define SCORE_BACKG "./textures/score-backg.xpm"
 # define PL_F "./textures/player_f.xpm"
 # define PL_B "./textures/player_b.xpm"
 # define PL_L "./textures/player_l.xpm"
@@ -98,8 +97,8 @@ typedef struct s_data
 	void	*item;
 	void	*exit;
 	void	*wall;
-	int		imgy;
-	int		imgx;
+	int		img_y;
+	int		img_x;
 	t_map	*map;
 }	t_data;
 
@@ -117,13 +116,13 @@ int		is_walled(t_data *m);
 int		valid_path(t_data *m);
 
 /* render_map.c */
-void	start_game(t_data *d);
+void	init_game(t_data *d);
 int		check_move(t_data *d, int x, int y);
 void	render_after_move(t_data *d);
 
 /* screen.c */
-void	in_image(t_data *d);
-void	put_image(t_data *d);
+void	reg_images(t_data *d);
+void	put_images(t_data *d);
 
 /* key_hooks.c */
 int		key_event(int key_code, t_data *d);

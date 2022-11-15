@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/14 17:32:15 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/15 10:03:12 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS	= -g -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
-HEADERS_PATHS 	= ./includes/ $(LIB_PATH)/includes/ $(MLX_PATH)
+HEADERS_PATHS 	= ./includes/ $(LIB_PATH)includes/ $(MLX_PATH)
 HEADERS			= $(addprefix -I,$(HEADERS_PATHS))
 
 # LIBFT
@@ -142,7 +142,7 @@ check:
 
 norme:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
-	norminette $(SRCS_PATH) $(BONUS_SRCS_PATH) ./includes/ $(LIB_PATH)/includes/
+	norminette $(SRCS_PATH) $(BONUS_SRCS_PATH) ./includes/
 
 map1: header $(NAME)
 	@echo "$(BLUE)TEST: MAP 1$(YELLOW)\n"

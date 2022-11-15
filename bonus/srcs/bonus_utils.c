@@ -6,23 +6,11 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 13:05:38 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 18:52:56 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:38:52 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_so_long.h"
-
-void	info_usage(void)
-{
-	ft_printf("\n\033[1;92mSO_LONG - INFO\033[0m\n\n");
-	ft_printf("To move, use:\t");
-	ft_printf("    \033[1;96m'W'\033[0m\n");
-	ft_printf("\t\t\033[1;93m'A'\033[0m");
-	ft_printf(" \033[1;94m'S'\033[0m");
-	ft_printf(" \033[1;95m'D'\033[0m\n");
-	ft_printf("\nTo quit, use:\t\033[1;91m'ESC'\033[0m" );
-	ft_printf("  or click on \033[1;91m'X'\033[0m\n\n");
-}
 
 void	init_structs(t_data **d, t_map **m)
 {
@@ -40,12 +28,6 @@ void	init_structs(t_data **d, t_map **m)
 	(*d)->map->space = '0';
 	(*d)->map->current_pos = 'F';
 	(*d)->anim = 0;
-}
-
-int	close_window(t_data *d)
-{
-	free_n_exit_safe(d);
-	return (0);
 }
 
 void	free_strs(char	**strs)
@@ -67,4 +49,42 @@ void	count_exit(t_data *m, int y, int x)
 	m->map->exit++;
 	m->map->ex_y = y;
 	m->map->ex_x = x;
+}
+
+void	reg_player_images(t_data *d)
+{
+	d->player_f = mlx_xpm_file_to_image(d->mlx_ptr, PL_F,
+			&d->img_x, &d->img_y);
+	d->player_ff = mlx_xpm_file_to_image(d->mlx_ptr, PL_FF,
+			&d->img_x, &d->img_y);
+	d->player_b = mlx_xpm_file_to_image(d->mlx_ptr, PL_B,
+			&d->img_x, &d->img_y);
+	d->player_bb = mlx_xpm_file_to_image(d->mlx_ptr, PL_BB,
+			&d->img_x, &d->img_y);
+	d->player_l = mlx_xpm_file_to_image(d->mlx_ptr, PL_L,
+			&d->img_x, &d->img_y);
+	d->player_ll = mlx_xpm_file_to_image(d->mlx_ptr, PL_LL,
+			&d->img_x, &d->img_y);
+	d->player_r = mlx_xpm_file_to_image(d->mlx_ptr, PL_R,
+			&d->img_x, &d->img_y);
+	d->player_rr = mlx_xpm_file_to_image(d->mlx_ptr, PL_RR,
+			&d->img_x, &d->img_y);
+	if (!d->player_f || !d->player_ff || !d->player_b || !d->player_bb
+		|| !d->player_l || !d->player_ll || !d->player_r || !d->player_rr)
+	{
+		free_mlx_images(d);
+		error_exit(d, ERR_MLX_FILE2IMG, NULL);
+	}
+}
+
+void	error_message_n_exit(char *err, t_data *d)
+{
+	if (d)
+	{
+		free(d->map);
+		free(d);
+	}
+	ft_putendl_fd(ERR, 2);
+	perror(err);
+	exit(EXIT_FAILURE);
 }

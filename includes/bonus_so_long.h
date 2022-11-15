@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 22:06:35 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:38:30 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@
 # define EXIT_O "./textures/door-open.xpm"
 # define EXIT_C "./textures/door-closed.xpm"
 # define WALL "./textures/wall.xpm"
-# define OBST "./textures/obstacle.xpm"
 # define ITEM "./textures/item.xpm"
 
 /* Key codes */
@@ -115,12 +114,15 @@ typedef struct s_data
 	void	*exit_c;
 	void	*exit_o;
 	void	*wall;
-	void	*obst;
 	int		anim;
-	int		imgy;
-	int		imgx;
+	int		img_y;
+	int		img_x;
 	t_map	*map;
 }	t_data;
+
+/* bonus_main.c */
+void	info_usage(void);
+int		close_window(t_data *d);
 
 /* check_file.c */
 void	check_file(char *file_line);
@@ -136,13 +138,13 @@ int		is_walled(t_data *m);
 int		valid_path(t_data *m);
 
 /* render_map.c */
-void	start_game(t_data *d);
+void	init_game(t_data *d);
 int		check_move(t_data *d, int x, int y);
 void	render_after_move(t_data *d);
 
 /* screen.c */
-void	in_image(t_data *d);
-void	put_image(t_data *d);
+void	reg_images(t_data *d);
+void	put_images(t_data *d);
 
 /* key_hooks.c */
 int		key_event(int key_code, t_data *d);
@@ -150,17 +152,14 @@ int		key_event(int key_code, t_data *d);
 /* exit_handling.c */
 void	free_mlx_images(t_data *d);
 void	basic_error_message(char *err, void *free_this);
-void	error_message_n_exit(char *err, t_data *d);
 void	error_exit(t_data *d, char *err, void *free_this);
 void	free_n_exit_safe(t_data *d);
 
 /* utils.c */
-void	info_usage(void);
 void	init_structs(t_data **d, t_map **m);
-int		close_window(t_data *d);
 void	free_strs(char	**strs);
 void	count_exit(t_data *m, int y, int x);
-
-void	score(t_data *d);
+void	reg_player_images(t_data *d);
+void	error_message_n_exit(char *err, t_data *d);
 
 #endif

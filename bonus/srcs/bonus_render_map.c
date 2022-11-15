@@ -6,21 +6,21 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 08:14:56 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:33:17 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_so_long.h"
 
-void	start_game(t_data *d)
+void	init_game(t_data *d)
 {
-	in_image(d);
+	reg_images(d);
 	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64,
 			d->map->height * 64, TITLE);
 	if (d->window == NULL)
 		error_exit(d, ERR_MLX_WIN, NULL);
 	d->map->current_pos = 'F';
-	put_image(d);
+	put_images(d);
 }
 
 int	check_move(t_data *d, int x, int y)
@@ -47,5 +47,5 @@ int	check_move(t_data *d, int x, int y)
 void	render_after_move(t_data *d)
 {
 	mlx_clear_window(d->mlx_ptr, d->window);
-	put_image(d);
+	put_images(d);
 }

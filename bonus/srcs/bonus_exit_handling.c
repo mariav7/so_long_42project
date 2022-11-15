@@ -6,28 +6,14 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:46:12 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 19:24:17 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:23:38 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_so_long.h"
 
-void	free_mlx_images(t_data *d)
+static void	free_player_images(t_data *d)
 {
-	if (d->backg)
-		mlx_destroy_image(d->mlx_ptr, d->backg);
-	if (d->score_backg)
-		mlx_destroy_image(d->mlx_ptr, d->score_backg);
-	if (d->item)
-		mlx_destroy_image(d->mlx_ptr, d->item);
-	if (d->wall)
-		mlx_destroy_image(d->mlx_ptr, d->wall);
-	if (d->obst)
-		mlx_destroy_image(d->mlx_ptr, d->obst);
-	if (d->exit_o)
-		mlx_destroy_image(d->mlx_ptr, d->exit_o);
-	if (d->exit_c)
-		mlx_destroy_image(d->mlx_ptr, d->exit_c);
 	if (d->player_l)
 		mlx_destroy_image(d->mlx_ptr, d->player_l);
 	if (d->player_ll)
@@ -46,24 +32,29 @@ void	free_mlx_images(t_data *d)
 		mlx_destroy_image(d->mlx_ptr, d->player_ff);
 }
 
+void	free_mlx_images(t_data *d)
+{
+	if (d->backg)
+		mlx_destroy_image(d->mlx_ptr, d->backg);
+	if (d->score_backg)
+		mlx_destroy_image(d->mlx_ptr, d->score_backg);
+	if (d->item)
+		mlx_destroy_image(d->mlx_ptr, d->item);
+	if (d->wall)
+		mlx_destroy_image(d->mlx_ptr, d->wall);
+	if (d->exit_o)
+		mlx_destroy_image(d->mlx_ptr, d->exit_o);
+	if (d->exit_c)
+		mlx_destroy_image(d->mlx_ptr, d->exit_c);
+	free_player_images(d);
+}
+
 void	basic_error_message(char *err, void *free_this)
 {
 	if (free_this)
 		free(free_this);
 	ft_putendl_fd(ERR, 2);
 	ft_putendl_fd(err, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	error_message_n_exit(char *err, t_data *d)
-{
-	if (d)
-	{
-		free(d->map);
-		free(d);
-	}
-	ft_putendl_fd(ERR, 2);
-	perror(err);
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:47:00 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 09:42:12 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		mlx->mlx_ptr = mlx_init();
 		if (mlx->mlx_ptr == NULL)
 			error_exit(mlx, ERR_MLX, NULL);
-		start_game(mlx);
+		init_game(mlx);
 		mlx_hook(mlx->window, 2, 1L << 0, key_event, mlx);
 		mlx_hook(mlx->window, 17, 1L << 2, close_window, mlx);
 		mlx_loop(mlx->mlx_ptr);

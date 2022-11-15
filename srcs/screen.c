@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 19:38:29 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:37:19 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	xy_counter(int *x, int *y, t_data *d)
 	*x += 64;
 }
 
-static void	put_image_player(t_data *d, int x, int y)
+static void	put_images_player(t_data *d, int x, int y)
 {
 	if (d->map->current_pos == 'F')
 		mlx_put_image_to_window(d->mlx_ptr, d->window, d->player_f, x, y);
@@ -34,7 +34,7 @@ static void	put_image_player(t_data *d, int x, int y)
 		mlx_put_image_to_window(d->mlx_ptr, d->window, d->player_b, x, y);
 }
 
-void	put_image(t_data *d)
+void	put_images(t_data *d)
 {
 	int	x;
 	int	y;
@@ -55,29 +55,29 @@ void	put_image(t_data *d)
 		else if (d->map->map[y / 64][x / 64] == 'C')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->item, x, y);
 		else if (d->map->map[y / 64][x / 64] == 'P')
-			put_image_player(d, x, y);
+			put_images_player(d, x, y);
 		xy_counter(&x, &y, d);
 	}
 }
 
-void	in_image(t_data *d)
+void	reg_images(t_data *d)
 {
 	d->player_f = mlx_xpm_file_to_image(d->mlx_ptr, PL_F,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->player_b = mlx_xpm_file_to_image(d->mlx_ptr, PL_B,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->player_l = mlx_xpm_file_to_image(d->mlx_ptr, PL_L,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->player_r = mlx_xpm_file_to_image(d->mlx_ptr, PL_R,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->backg = mlx_xpm_file_to_image(d->mlx_ptr, BACKG,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->item = mlx_xpm_file_to_image(d->mlx_ptr, ITEM,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->exit = mlx_xpm_file_to_image(d->mlx_ptr, EXIT,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	d->wall = mlx_xpm_file_to_image(d->mlx_ptr, WALL,
-			&d->imgx, &d->imgy);
+			&d->img_x, &d->img_y);
 	if (!d->player_f || !d->player_b || !d->player_l || !d->player_r
 		|| !d->backg || !d->item || !d->exit || !d->wall)
 	{

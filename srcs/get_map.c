@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 09:34:01 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 09:39:26 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_map(t_data *m, char *fmap)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		all_lines = string_join(all_lines, line);
 		free(line);
 	}
