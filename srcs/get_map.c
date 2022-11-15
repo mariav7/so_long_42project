@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 18:52:15 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:38:25 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,34 @@ static char	*string_join(char *s1, char const *s2)
 	return (new_str);
 }
 
-static void	check_newlines(t_data *m, char *all_lines)
+static void	check_newlines(t_data *m, char *all_lines, int nb_lines)
 {
 	int	i;
+	int	n;
 	
 	i = 0;
-	if (all_lines[i] == '\0')
+	if (all_lines[0] == '\0')
 			error_exit(m, ERR_FILE3, all_lines);
+	n = 0;
 	while (all_lines[i] != '\0')
 	{
 		if (all_lines[i] == '\n')
-			error_exit(m, ERR_MAP, all_lines);
-		while (all_lines[i] != '\0' && all_lines[i] != '\n')
-			i++;
-		printf("\nHERE:%c\n", all_lines[i]);
-		if (all_lines[i] == 'n')
-			i++;
-		printf("\nHERE:%c\n", all_lines[i]);
-		if (all_lines[i] == '\0')
-			break;
+			n++;
+		i++;
 	}
+	if (all_lines[i] == '\0')
+		n++;
+	if (n != nb_lines)
+		error_exit(m, ERR_MAP, all_lines);
+	m->map->map = ft_split(all_lines, '\n');
+	m->map->tmp_map = ft_split(all_lines, '\n');
 }
 
 void	get_map(t_data *m, char *fmap)
 {
 	char	*line;
 	char	*all_lines;
+	int		count_lines;
 	int		fd;
 
 	fd = open(fmap, O_RDONLY);
@@ -70,21 +72,19 @@ void	get_map(t_data *m, char *fmap)
 		error_message_n_exit(ERR_FILE2, m);
 	line = "";
 	all_lines = ft_strdup("");
+	count_lines = 0;
 	while (line)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		all_lines = string_join(all_lines, line);
+		if (line[0] != '\0' && line[0] != '\n')
+			count_lines++;
 		free(line);
 	}
 	free(line);
 	close(fd);
-	if (all_lines[0] == '\0')
-		error_exit(m, ERR_FILE3, all_lines);
-	printf("%s", all_lines);
-	check_newlines(m, all_lines);
-	m->map->map = ft_split(all_lines, '\n');
-	m->map->tmp_map = ft_split(all_lines, '\n');
+	check_newlines(m, all_lines, count_lines);
 	free(all_lines);
 }
