@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 10:36:57 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:00:21 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define TITLE "SO_LONG"
 
 /* Textures */
+# define SIZE 64
 # define BACKG "./textures/backg.xpm"
 # define PL_F "./textures/player_f.xpm"
 # define PL_B "./textures/player_b.xpm"

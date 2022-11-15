@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 10:33:17 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:59:09 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	init_game(t_data *d)
 {
 	reg_images(d);
-	d->window = mlx_new_window(d->mlx_ptr, d->map->width * 64,
-			d->map->height * 64, TITLE);
+	d->window = mlx_new_window(d->mlx_ptr, d->map->width * SIZE,
+			d->map->height * SIZE, TITLE);
 	if (d->window == NULL)
 		error_exit(d, ERR_MLX_WIN, NULL);
 	d->map->current_pos = 'F';

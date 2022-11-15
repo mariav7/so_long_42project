@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:47:55 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 10:37:19 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:01:00 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	xy_counter(int *x, int *y, t_data *d)
 {
-	if (*x == d->map->width * 64)
+	if (*x == d->map->width * SIZE)
 	{
-		*x = -64;
-		*y += 64;
+		*x = -SIZE;
+		*y += SIZE;
 	}
-	*x += 64;
+	*x += SIZE;
 }
 
 static void	put_images_player(t_data *d, int x, int y)
@@ -41,20 +41,20 @@ void	put_images(t_data *d)
 
 	x = 0;
 	y = 0;
-	while (y < d->map->height * 64)
+	while (y < d->map->height * SIZE)
 	{
-		if (d->map->map[y / 64][x / 64] != '1'
-			&& d->map->map[y / 64][x / 64] != '0')
+		if (d->map->map[y / SIZE][x / SIZE] != '1'
+			&& d->map->map[y / SIZE][x / SIZE] != '0')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->backg, x, y);
-		if (d->map->map[y / 64][x / 64] == '1')
+		if (d->map->map[y / SIZE][x / SIZE] == '1')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->wall, x, y);
-		else if (d->map->map[y / 64][x / 64] == '0')
+		else if (d->map->map[y / SIZE][x / SIZE] == '0')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->backg, x, y);
-		else if (d->map->map[y / 64][x / 64] == 'E')
+		else if (d->map->map[y / SIZE][x / SIZE] == 'E')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->exit, x, y);
-		else if (d->map->map[y / 64][x / 64] == 'C')
+		else if (d->map->map[y / SIZE][x / SIZE] == 'C')
 			mlx_put_image_to_window(d->mlx_ptr, d->window, d->item, x, y);
-		else if (d->map->map[y / 64][x / 64] == 'P')
+		else if (d->map->map[y / SIZE][x / SIZE] == 'P')
 			put_images_player(d, x, y);
 		xy_counter(&x, &y, d);
 	}
