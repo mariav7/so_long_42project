@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 14:16:28 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:20:53 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@
 
 /* Textures */
 # define SIZE 64
-# define BACKG "./textures/backg.xpm"
-# define PL_F "./textures/player_f.xpm"
-# define PL_B "./textures/player_b.xpm"
-# define PL_L "./textures/player_l.xpm"
-# define PL_R "./textures/player_r.xpm"
-# define EXIT "./textures/door-closed.xpm"
-# define WALL "./textures/wall.xpm"
-# define ITEM "./textures/item.xpm"
+# define BACKG "./sprites/backg.xpm"
+# define PL_F "./sprites/player_f.xpm"
+# define PL_B "./sprites/player_b.xpm"
+# define PL_L "./sprites/player_l.xpm"
+# define PL_R "./sprites/player_r.xpm"
+# define EXIT "./sprites/door-closed.xpm"
+# define WALL "./sprites/wall.xpm"
+# define ITEM "./sprites/item.xpm"
 
 /* Key codes */
 # define LEFT 97

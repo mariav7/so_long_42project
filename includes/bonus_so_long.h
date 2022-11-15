@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 14:08:16 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:20:44 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@
 
 /* Textures */
 # define SIZE 64
-# define BACKG "./textures/backg.xpm"
-# define SCORE_BACKG "./textures/score-backg.xpm"
-# define PL_F "./textures/player_f.xpm"
-# define PL_FF "./textures/player_ff.xpm"
-# define PL_B "./textures/player_b.xpm"
-# define PL_BB "./textures/player_bb.xpm"
-# define PL_L "./textures/player_l.xpm"
-# define PL_LL "./textures/player_ll.xpm"
-# define PL_R "./textures/player_r.xpm"
-# define PL_RR "./textures/player_rr.xpm"
-# define EXIT_O "./textures/door-open.xpm"
-# define EXIT_C "./textures/door-closed.xpm"
-# define WALL "./textures/wall.xpm"
-# define ITEM "./textures/item.xpm"
+# define BACKG "./sprites/backg.xpm"
+# define SCORE_BACKG "./sprites/score-backg.xpm"
+# define PL_F "./sprites/player_f.xpm"
+# define PL_FF "./sprites/player_ff.xpm"
+# define PL_B "./sprites/player_b.xpm"
+# define PL_BB "./sprites/player_bb.xpm"
+# define PL_L "./sprites/player_l.xpm"
+# define PL_LL "./sprites/player_ll.xpm"
+# define PL_R "./sprites/player_r.xpm"
+# define PL_RR "./sprites/player_rr.xpm"
+# define EXIT_O "./sprites/door-open.xpm"
+# define EXIT_C "./sprites/door-closed.xpm"
+# define WALL "./sprites/wall.xpm"
+# define ITEM "./sprites/item.xpm"
 
 /* Key codes */
 # define LEFT 97
