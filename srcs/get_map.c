@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 09:39:26 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:52:15 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ static char	*string_join(char *s1, char const *s2)
 	return (new_str);
 }
 
+static void	check_newlines(t_data *m, char *all_lines)
+{
+	int	i;
+	
+	i = 0;
+	if (all_lines[i] == '\0')
+			error_exit(m, ERR_FILE3, all_lines);
+	while (all_lines[i] != '\0')
+	{
+		if (all_lines[i] == '\n')
+			error_exit(m, ERR_MAP, all_lines);
+		while (all_lines[i] != '\0' && all_lines[i] != '\n')
+			i++;
+		printf("\nHERE:%c\n", all_lines[i]);
+		if (all_lines[i] == 'n')
+			i++;
+		printf("\nHERE:%c\n", all_lines[i]);
+		if (all_lines[i] == '\0')
+			break;
+	}
+}
+
 void	get_map(t_data *m, char *fmap)
 {
 	char	*line;
@@ -60,6 +82,8 @@ void	get_map(t_data *m, char *fmap)
 	close(fd);
 	if (all_lines[0] == '\0')
 		error_exit(m, ERR_FILE3, all_lines);
+	printf("%s", all_lines);
+	check_newlines(m, all_lines);
 	m->map->map = ft_split(all_lines, '\n');
 	m->map->tmp_map = ft_split(all_lines, '\n');
 	free(all_lines);

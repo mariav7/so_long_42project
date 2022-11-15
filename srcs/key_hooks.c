@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:06:01 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 14:18:27 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:28:27 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	go_up(t_data *d)
 		d->map->map[d->map->play_y][d->map->play_x] = '0';
 		d->map->play_y -= 1;
 		d->map->map[d->map->play_y][d->map->play_x] = 'P';
-		d->map->current_pos = 'F';
+		d->map->current_pos = 'B';
 		render_after_move(d);
 	}
 }
