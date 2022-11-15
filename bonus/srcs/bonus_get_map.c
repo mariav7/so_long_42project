@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 15:20:32 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 09:36:18 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	get_map(t_data *m, char *fmap)
 	while (line)
 	{
 		line = get_next_line(fd);
-		if (line == NULL || line[0] == '\n')
+		if (line == NULL)
 			break ;
 		all_lines = string_join(all_lines, line);
 		free(line);

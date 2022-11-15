@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/14 17:58:49 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/15 08:14:56 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_move(t_data *d, int x, int y)
 	if (d->map->map[y][x] != '1')
 	{
 		if (d->map->map[y][x] == 'C')
-			d->map->items--;		
+			d->map->items--;
 		else if (d->map->items == 0 && d->map->map[y][x] == 'E')
 		{
 			++(d->map->move_count);
