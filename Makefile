@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/15 12:09:37 by mflores-         ###   ########.fr        #
+#    Updated: 2022/11/16 10:24:51 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIB			= -L$(LIB_PATH) -l$(LIB_NAME)
 # MINILIBX
 MLX_NAME	= mlx_Linux
 MLX_PATH 	= ./mlx-linux
-MLX_FLAGS	= -lXext -lX11 -lmlx
+MLX_FLAGS	= -lXext -lX11 -lmlx -lft -lm
 MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 # SO_LONG
