@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 20:38:25 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/16 09:41:35 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	check_newlines(t_data *m, char *all_lines, int nb_lines)
 {
 	int	i;
 	int	n;
-	
+
 	i = 0;
 	if (all_lines[0] == '\0')
-			error_exit(m, ERR_FILE3, all_lines);
+		error_exit(m, ERR_FILE3, all_lines);
 	n = 0;
 	while (all_lines[i] != '\0')
 	{
