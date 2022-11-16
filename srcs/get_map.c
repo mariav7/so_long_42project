@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:02:03 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/16 09:41:35 by mflores-         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:20:15 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	check_newlines(t_data *m, char *all_lines, int nb_lines)
 			n++;
 		i++;
 	}
-	if (all_lines[i] == '\0')
+	if (all_lines[i] == '\0' && all_lines[i - 1] != '\n')
 		n++;
 	if (n != nb_lines)
 		error_exit(m, ERR_MAP, all_lines);
