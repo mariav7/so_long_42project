@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/16 10:24:51 by mflores-         ###   ########.fr        #
+#    Updated: 2023/03/31 17:18:26 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,23 @@ FLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
 # HEADERS
-HEADERS_PATHS 	= ./includes/ $(LIB_PATH)includes/ $(MLX_PATH)
-HEADERS			= $(addprefix -I,$(HEADERS_PATHS))
+HEADER_FILES	= so_long bonus_so_long
+HEADERS_PATH 	= includes/
+HEADERS			= $(addsuffix .h, $(addprefix $(HEADERS_PATH), $(HEADER_FILES)))
+HEADERS_INC		= $(addprefix -I, $(HEADERS_PATH) $(LIB_HEADER_PATH) $(MLX_HEADER_PATH))
 
 # LIBFT
 LIB_NAME 	= ft
-LIB_PATH	= ./libft/
+LIB_PATH	= libft/
 LIB			= -L$(LIB_PATH) -l$(LIB_NAME)
+LIB_HEADER_PATH = $(LIB_PATH)includes/
 
 # MINILIBX
+MLX_HEADER_FILES	= mlx mlx_init
+MLX_HEADER_PATH	= $(addsuffix .h, $(addprefix $(MLX_PATH), $(MLX_HEADER_FILES)))
 MLX_NAME	= mlx_Linux
-MLX_PATH 	= ./mlx-linux
-MLX_FLAGS	= -lXext -lX11 -lmlx -lft -lm
+MLX_PATH 	= mlx-linux
+MLX_FLAGS	= -lXext -lX11 -lft -lm
 MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 # SO_LONG
@@ -51,50 +56,68 @@ BONUS_OBJS_NAMES	= $(BONUS_SRCS_NAMES:.c=.o)
 BONUS_OBJS_PATH 	= ./bonus/objs/
 BONUS_OBJS			= $(addprefix $(BONUS_OBJS_PATH), $(BONUS_OBJS_NAMES))
 
+# Gcc/Clang will create these .d files containing dependencies
+DEPS		= $(addprefix $(OBJS_PATH), $(SRCS_NAMES:.c=.d))
+
 # RULES
 all:	header $(NAME)
-	@echo "$(GREEN)[ ✔ ] $(MAGENTA)SO_LONG READY$(WHITE)"
+	@echo "\n$(GREEN)[ ✔ ] SO_LONG$(WHITE)"
+	@echo "\033[1;39m\n▶ TO LAUNCH:\t./so_long map.ber\n $(DEF_COLOR)"
 
-$(NAME): lib mlx $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
-
+# Actual target of the binary - depends on all .o files
+$(NAME): lib $(HEADERS) $(OBJS)
+# Compile Minilibx
+	@echo "$(YELLOW)\n. . . COMPILING MINILIBX OBJECTS. . . $(WHITE)\n"
+	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
+	@echo "$(GREEN)[ ✔ ] MINILIBX$(WHITE)"
+# Link all the object files
+	@$(CC) $(FLAGS) $(HEADERS_INC) $(OBJS) $(LIB) $(MLX) -o $(NAME)
+# Build target for every single object file
+# The potential dependency on header files is covered
+# by calling `-include $(DEPS)`
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) $(NAME)\n"
+# Create objs directory
 	@mkdir -p $(OBJS_PATH)
-	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
+  # The -MMD flags additionaly creates a .d file with
+  # the same name as the .o file.
+	@$(CC) $(FLAGS) $(HEADERS_INC) -MMD -MP -o $@ -c $<
+	@printf "$(YELLOW). . . COMPILING SO_LONG OBJECTS . . . $(GREY)%-33.33s\r$(DEF_COLOR)" $@
 
 $(BONUS_OBJS_PATH)%.o: $(BONUS_SRCS_PATH)%.c
-	@echo "$(YELLOW)\n. . . COMPILING . . .$(WHITE) bonus $(NAME)\n"
+	@echo "$(YELLOW)\n. . . COMPILING BONUS SO_LONG. . .$(WHITE)\n"
 	@mkdir -p $(BONUS_OBJS_PATH)
-	@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(MLX) -o $@ -c $<
+	@$(CC) $(FLAGS) $(HEADERS_INC) -MMD -MP -o $@ -c $<
+	@printf "$(YELLOW). . . COMPILING BONUS SO_LONG OBJECTS . . . $(GREY)%-33.33s\r$(DEF_COLOR)" $@
 
 lib:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH)
-	@echo "$(GREEN)[ ✔ ] LIBFT READY$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] LIBFT $(WHITE)"
 
-mlx:
-	@echo "$(YELLOW)\n. . . COMPILING . . . $(WHITE)minilibx\n"
+bonus:	header lib $(HEADERS) $(BONUS_OBJS)
+	@echo "$(YELLOW)\n. . . COMPILING MINILIBX OBJECTS. . . $(WHITE)\n"
 	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
-	@echo "$(GREEN)[ ✔ ] MINILIBX READY$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] MINILIBX$(WHITE)"
+	@echo "$(YELLOW). . . COMPILING BONUS SO_LONG. . .$(WHITE)\n"
+	@$(CC) $(FLAGS) $(HEADERS_INC) $(BONUS_OBJS) $(LIB) $(MLX) -o $(NAME)
+	@echo "$(GREEN)[ ✔ ] BONUS SO_LONG $(WHITE)"
 
 clean:
-	@echo "$(YELLOW)\n. . . CLEANING . . .\n$(WHITE)"
+	@echo "$(YELLOW)\n. . . CLEANING OBJECTS . . .\n$(DEF_COLOR)"
 	@$(MAKE) --no-print-directory clean -C $(LIB_PATH)
 	@$(MAKE) --no-print-directory clean -sC $(MLX_PATH)
 	@$(RM) $(OBJS) $(BONUS_OBJS)
 	@$(RM) -r $(OBJS_PATH) $(BONUS_OBJS_PATH)
-	@echo "$(GREEN)[ ✔ ][ OBJECTS CLEANED ]$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] OBJECTS CLEANED$(DEF_COLOR)"
 
 fclean:	clean
-	@echo "$(YELLOW)\n. . . CLEANING . . .\n$(WHITE)"
+ifeq ("$(shell test -e $(NAME) && echo $$?)","0")
+	@echo "$(YELLOW)\n. . . CLEANING REST . . .\n$(DEF_COLOR)"
 	@$(MAKE) --no-print-directory fclean -C $(LIB_PATH)
 	@$(RM) $(NAME)
-	@echo "$(GREEN)[ ✔ ][ ALL CLEANED ]$(WHITE)"
-
-bonus:	header lib mlx $(BONUS_OBJS)
-		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) bonus so_long\n"
-		@$(CC) $(FLAGS) $(BONUS_OBJS) $(LIB) $(HEADERS) $(MLX) -o $(NAME)
-		@echo "$(BLUE)[ ✔ ]$(BLUE) BONUS SO_LONG READY$(WHITE)"
+	@echo "$(GREEN)[ ✔ ] ALL CLEANED$(DEF_COLOR)"
+else
+	@echo "$(GREEN)[ ✔ ] EXECUTABLES ALREADY CLEANED$(DEF_COLOR)"
+endif
 
 re:	fclean all
 

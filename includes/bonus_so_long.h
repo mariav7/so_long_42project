@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 21:20:44 by mflores-         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:00:29 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <libft.h>
 
 /* Other libs */
-# include <mlx.h>
+#include "../mlx-linux/mlx.h"
+/*# include <mlx.h>*/
 
 /* Error messages */
 # define ERR "\033[1;31mError \033[0m"
