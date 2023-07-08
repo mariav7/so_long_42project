@@ -20,7 +20,7 @@ RM		= rm -f
 HEADER_FILES	= so_long bonus_so_long
 HEADERS_PATH 	= includes/
 HEADERS			= $(addsuffix .h, $(addprefix $(HEADERS_PATH), $(HEADER_FILES)))
-HEADERS_INC		= $(addprefix -I, $(HEADERS_PATH) $(LIB_HEADER_PATH) $(MLX_HEADER_PATH))
+HEADERS_INC		= $(addprefix -I, $(HEADERS_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
 
 # LIBFT
 LIB_NAME 	= ft
@@ -32,7 +32,7 @@ LIB_HEADER_PATH = $(LIB_PATH)includes/
 MLX_HEADER_FILES	= mlx mlx_init
 MLX_HEADER_PATH	= $(addsuffix .h, $(addprefix $(MLX_PATH), $(MLX_HEADER_FILES)))
 MLX_NAME	= mlx_Linux
-MLX_PATH 	= mlx-linux
+MLX_PATH 	= mlx/
 MLX_FLAGS	= -lXext -lX11 -lft -lm
 MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 

@@ -17,8 +17,8 @@
 # include <libft.h>
 
 /* Other libs */
-#include "../mlx-linux/mlx.h"
-/*# include <mlx.h>*/
+//#include "../mlx-linux/mlx.h"
+# include <mlx.h>
 
 /* Error messages */
 # define ERR "\033[1;31mError \033[0m"
