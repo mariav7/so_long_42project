@@ -1,12 +1,7 @@
 <div align="center">
 
-     _______.  ______            __        ______   .__   __.   _______ 
-    /       | /  __  \          |  |      /  __  \  |  \ |  |  /  _____|
-   |   (----`|  |  |  |         |  |     |  |  |  | |   \|  | |  |  __  
-    \   \    |  |  |  |         |  |     |  |  |  | |  . `  | |  | |_ | 
-.----)   |   |  `--'  |         |  `----.|  `--'  | |  |\   | |  |__| | 
-|_______/     \______/   ______ |_______| \______/  |__| \__|  \______| 
-                        |______|                                           
+![Demo:](misc/demo.gif)
+
 ---
 Coded with 💗 by: [mflores-](https://github.com/mariav7)
 
@@ -59,7 +54,7 @@ make bonus && ./bonus_so_long maps/map1.ber
 
 OR
 
-**Compile project in NORMAL mode:**
+**Compile and run the project in NORMAL mode:**
 ```bash
 make && ./so_long maps/map1.ber
 ```
@@ -69,10 +64,3 @@ make && ./so_long maps/map1.ber
 ./map_testing.sh
 ```
 ---
-
-## Demo
-<div align="center">
-
-![Demo:](misc/demo.gif)
-
-</div>
