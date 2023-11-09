@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:50 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 14:14:38 by mflores-         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:44:53 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	info_usage(void)
 {
-	ft_printf("\n\033[1;92mSO_LONG - INFO\033[0m\n\n");
+	ft_printf("\n\033[1;93mBONUS_SO_LONG - HOW TO PLAY\033[0m\n\n");
 	ft_printf("To move, use:\t");
 	ft_printf("  \033[1;96mW\t\t  ↑\033[0m\n");
 	ft_printf("\t\t\033[1;93mA\033[0m");
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 		mlx->mlx_ptr = mlx_init();
 		if (mlx->mlx_ptr == NULL)
 			error_exit(mlx, ERR_MLX, NULL);
-		info_usage();
+		display_map(mlx->map);
 		init_game(mlx);
 		mlx_hook(mlx->window, 2, 1L << 0, key_event, mlx);
 		mlx_hook(mlx->window, 17, 1L << 17, close_window, mlx);

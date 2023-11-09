@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:47:41 by mflores-          #+#    #+#             */
-/*   Updated: 2023/03/31 17:00:41 by mflores-         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:06:48 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <libft.h>
 
 /* Other libs */
-//#include "../mlx-linux/mlx.h"
-# include <mlx.h>
+# include "../mlx/mlx.h"
+//# include <mlx.h>
 
 /* Error messages */
 # define ERR "\033[1;31mError \033[0m"
@@ -33,6 +33,7 @@
 # define ERR_MAP3 "Map: not rectangular"
 # define ERR_MAP4 "Map: not surrounded by walls"
 # define ERR_MAP5 "Map: invalid path"
+# define ERR_MAP6 "Map: is too big for the current screen"
 # define ERR_MLX "Minilibx: initialization failed"
 # define ERR_MLX_FILE2IMG "Minilibx: file to image failed"
 # define ERR_MLX_WIN "Minilibx: new window failed"

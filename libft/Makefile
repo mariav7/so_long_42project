@@ -6,68 +6,90 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 16:08:43 by mflores-          #+#    #+#              #
-#    Updated: 2022/11/10 20:06:07 by mflores-         ###   ########.fr        #
+#    Updated: 2023/11/09 12:19:09 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+#------------------------------------------------------------------------------#
+#	GENERAL																   	   #
+#------------------------------------------------------------------------------#
 NAME	= libft.a
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
-#FILES AND PATHS
-INC_PATH = ./includes/
+#------------------------------------------------------------------------------#
+#	HEADERS																	   #
+#------------------------------------------------------------------------------#
+INC_PATH = includes/
 INC		= $(addprefix -I,$(INC_PATH))
 
-SRC_NAME = ft_isascii.c ft_isprint.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
-		ft_islower.c ft_isupper.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \
-		ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strncmp.c ft_atoi.c \
-		ft_memset.c ft_bzero.c ft_memcpy.c ft_split.c ft_memmove.c \
-		ft_memchr.c ft_memcmp.c ft_strdup.c ft_calloc.c ft_itoa.c \
-		ft_substr.c ft_strjoin.c ft_strtrim.c ft_strmapi.c ft_tolower.c \
-		ft_toupper.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c get_next_line.c get_next_line_utils.c \
-		ft_printf.c ft_printf_utils.c ft_printf_unsigned.c
+#------------------------------------------------------------------------------#
+#	LIBFT FILES															   	   #
+#------------------------------------------------------------------------------#
+SRCS_NAME = ft_isascii ft_isprint ft_isalpha ft_isdigit ft_isalnum \
+		ft_islower ft_isupper ft_strlen ft_strlcpy ft_strlcat \
+		ft_strchr ft_strrchr ft_strnstr ft_strncmp ft_atoi \
+		ft_memset ft_bzero ft_memcpy ft_split ft_memmove \
+		ft_memchr ft_memcmp ft_strdup ft_calloc ft_itoa \
+		ft_substr ft_strjoin ft_strtrim ft_strmapi ft_tolower \
+		ft_toupper ft_striteri ft_putchar_fd ft_putstr_fd \
+		ft_putendl_fd ft_putnbr_fd ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back \
+		ft_lstdelone ft_lstclear ft_lstiter ft_lstmap get_next_line get_next_line_utils \
+		ft_printf ft_printf_utils ft_printf_unsigned
 
-SRC_PATH = ./srcs/
-SRC	= $(addprefix $(SRC_PATH), $(SRC_NAME))
-OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJ_PATH = ./objs/
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+SRCS_PATH = srcs/
+SRCS = $(addsuffix .c, $(SRCS_NAME))
 
-# RULES
-all:	$(NAME)
+OBJS_NAME = $(SRCS:.c=.o)
+OBJS_PATH = objs/
+OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 
-$(NAME):	$(OBJ)
-		@ar rc $(NAME) $(OBJ)
-		@echo "$(YELLOW). . . COMPILING . . .$(WHITE) libft"
+#------------------------------------------------------------------------------#
+#	BASIC RULES																   #
+#------------------------------------------------------------------------------#
+all: $(NAME)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+$(NAME): $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+	@mkdir -p $(OBJS_PATH)
+	@$(CC) $(FLAGS) $(INC) -MMD -o $@ -c $<
+	@printf "$(YELLOW). . . compiling $(NAME) objects . . . => $(ITALIC)$(GREY)%-33.33s\r$(RESET)" $@
 
 clean:
-	@$(RM) $(OBJ)
-	@$(RM) -r $(OBJ_PATH)
+	@$(RM) -rd $(OBJS_PATH)
 
 fclean:	clean
 	@$(RM) $(NAME)
 
 re:	fclean all
 
-norme:
-	norminette $(SRC_PATH) $(INC_PATH)libft.h
+-include $(DEPS)
 
-.PHONY:	all clean fclean re norme
+.PHONY:	all clean fclean re
 
-#Colors
-DEF_COLOR = \033[0;39m
-GRAY = \033[0;90m
-RED = \033[0;91m
-GREEN = \033[1;92m
-YELLOW = \033[1;93m
-BLUE = \033[0;94m
-MAGENTA = \033[0;95m
-CYAN = \033[0;96m
-WHITE = \033[0;97m
+# COLORS
+RESET = \033[0m
+WHITE = \033[37m
+GREY = \033[90m
+RED = \033[91m
+DRED = \033[31m
+GREEN = \033[92m
+DGREEN = \033[32m
+YELLOW = \033[93m
+DYELLOW = \033[33m
+BLUE = \033[94m
+DBLUE = \033[34m
+MAGENTA = \033[95m
+DMAGENTA = \033[35m
+CYAN = \033[96m
+DCYAN = \033[36m
+
+# FORMAT
+BOLD = \033[1m
+ITALIC = \033[3m
+UNDERLINE = \033[4m
+STRIKETHROUGH = \033[9m
+BLINK	= \033[5m

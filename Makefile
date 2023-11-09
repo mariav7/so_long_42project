@@ -6,72 +6,92 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2023/03/31 17:18:26 by mflores-         ###   ########.fr        #
+#    Updated: 2023/11/09 14:32:23 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# GENERAL
-NAME	= so_long
-CC		= cc
-FLAGS	= -Wall -Wextra -Werror
-RM		= rm -f
+#------------------------------------------------------------------------------#
+#	GENERAL																	   #
+#------------------------------------------------------------------------------#
+NAME		= so_long
+BONUS_NAME	= bonus_so_long
+CC			= cc
+FLAGS		= -Wall -Wextra -Werror -g
+RM			= rm -f
 
-# HEADERS
-HEADER_FILES	= so_long bonus_so_long
-HEADERS_PATH 	= includes/
-HEADERS			= $(addsuffix .h, $(addprefix $(HEADERS_PATH), $(HEADER_FILES)))
-HEADERS_INC		= $(addprefix -I, $(HEADERS_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
+#------------------------------------------------------------------------------#
+#	HEADERS																	   #
+#------------------------------------------------------------------------------#
+HEADER_FILES	= so_long
+HEADER_PATH 	= includes/
+HEADER			= $(addsuffix .h, $(addprefix $(HEADER_PATH), $(HEADER_FILES)))
+HEADER_INC		= $(addprefix -I, $(HEADER_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
 
-# LIBFT
-LIB_NAME 	= ft
-LIB_PATH	= libft/
-LIB			= -L$(LIB_PATH) -l$(LIB_NAME)
+BONUS_HEADER_FILES	= bonus_so_long
+BONUS_HEADER_PATH 	= bonus/includes/
+BONUS_HEADER		= $(addsuffix .h, $(addprefix $(BONUS_HEADER_PATH), $(BONUS_HEADER_FILES)))
+BONUS_HEADER_INC	= $(addprefix -I, $(BONUS_HEADER_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
+
+#------------------------------------------------------------------------------#
+#	LIBFT																	   #
+#------------------------------------------------------------------------------#
+LIB_NAME 		= ft
+LIB_PATH		= libft/
+LIB				= -L$(LIB_PATH) -l$(LIB_NAME)
 LIB_HEADER_PATH = $(LIB_PATH)includes/
 
-# MINILIBX
+#------------------------------------------------------------------------------#
+#	MINILIBX																   #
+#------------------------------------------------------------------------------#
 MLX_HEADER_FILES	= mlx mlx_init
-MLX_HEADER_PATH	= $(addsuffix .h, $(addprefix $(MLX_PATH), $(MLX_HEADER_FILES)))
-MLX_NAME	= mlx_Linux
-MLX_PATH 	= mlx/
-MLX_FLAGS	= -lXext -lX11 -lft -lm
-MLX			= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
+MLX_HEADER_PATH		= $(addsuffix .h, $(addprefix $(MLX_PATH), $(MLX_HEADER_FILES)))
+MLX_NAME			= mlx_Linux
+MLX_PATH 			= mlx/
+MLX_FLAGS   		= -L/usr/lib -lXext -lX11 -lm -lz -O3
+MLX					= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
-# SO_LONG
-SRCS_NAMES 	= main.c exit_handling.c key_hooks.c check_file.c get_map.c \
-			check_map.c check_map2.c render_map.c screen.c utils.c
-SRCS_PATH 	= ./srcs/
-SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAMES))
-OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
-OBJS_PATH 	= ./objs/
+#------------------------------------------------------------------------------#
+#	SO_LONG FILES															   #
+#------------------------------------------------------------------------------#
+SRCS_PATH 	= srcs/
+SRCS_NAMES 	= main exit_handling key_hooks check_file get_map check_map \
+			check_map2 render_map screen utils
+SRCS		= $(addsuffix .c, $(SRCS_NAMES))
+
+OBJS_PATH 	= objs/
+OBJS_NAMES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
 
-# SO_LONG BONUS
-BONUS_SRCS_NAMES 	= bonus_main.c bonus_exit_handling.c bonus_key_hooks.c \
-					bonus_check_file.c bonus_get_map.c bonus_check_map.c \
-					bonus_check_map2.c bonus_render_map.c bonus_screen.c \
-					bonus_utils.c
-BONUS_SRCS_PATH 	= ./bonus/srcs/
-BONUS_SRCS			= $(addprefix $(BONUS_SRCS_PATH), $(BONUS_SRCS_NAMES))
-BONUS_OBJS_NAMES	= $(BONUS_SRCS_NAMES:.c=.o)
-BONUS_OBJS_PATH 	= ./bonus/objs/
+# Gcc/Clang will create these .d files containing dependencies
+DEPS 		= $(OBJS:.o=.d)
+
+#------------------------------------------------------------------------------#
+#	SO_LONG BONUS FILES														   #
+#------------------------------------------------------------------------------#
+BONUS_SRCS_PATH 	= bonus/srcs/
+BONUS_SRCS_NAMES 	= bonus_main bonus_exit_handling bonus_key_hooks \
+					bonus_check_file bonus_get_map bonus_check_map \
+					bonus_check_map2 bonus_render_map bonus_screen bonus_utils
+BONUS_SRCS			= $(addsuffix .c, $(BONUS_SRCS_NAMES))
+
+BONUS_OBJS_PATH 	= $(addprefix $(OBJS_PATH), bonus/)
+BONUS_OBJS_NAMES	= $(BONUS_SRCS:.c=.o)
 BONUS_OBJS			= $(addprefix $(BONUS_OBJS_PATH), $(BONUS_OBJS_NAMES))
 
 # Gcc/Clang will create these .d files containing dependencies
-DEPS		= $(addprefix $(OBJS_PATH), $(SRCS_NAMES:.c=.d))
+DEPS_BONUS 			= $(BONUS_OBJS:.o=.d)
 
-# RULES
-all:	header $(NAME)
-	@echo "\n$(GREEN)[ ✔ ] SO_LONG$(WHITE)"
-	@echo "\033[1;39m\n▶ TO LAUNCH:\t./so_long map.ber\n $(DEF_COLOR)"
+#------------------------------------------------------------------------------#
+#	BASIC RULES																   #
+#------------------------------------------------------------------------------#
+all: header $(NAME)
+	@echo "\n\n$(GREEN)[ ✔ ]\tSO_LONG$(RESET)"
+	@echo "$(BOLD)\n▶ TO LAUNCH:\t./$(NAME) map_file.ber\n$(RESET)"
 
 # Actual target of the binary - depends on all .o files
-$(NAME): lib $(HEADERS) $(OBJS)
-# Compile Minilibx
-	@echo "$(YELLOW)\n. . . COMPILING MINILIBX OBJECTS. . . $(WHITE)\n"
-	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
-	@echo "$(GREEN)[ ✔ ] MINILIBX$(WHITE)"
+$(NAME): lib mlx $(HEADER) $(OBJS)
 # Link all the object files
-	@$(CC) $(FLAGS) $(HEADERS_INC) $(OBJS) $(LIB) $(MLX) -o $(NAME)
+	@$(CC) $(FLAGS) $(HEADER_INC) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 # Build target for every single object file
 # The potential dependency on header files is covered
 # by calling `-include $(DEPS)`
@@ -80,46 +100,64 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir -p $(OBJS_PATH)
   # The -MMD flags additionaly creates a .d file with
   # the same name as the .o file.
-	@$(CC) $(FLAGS) $(HEADERS_INC) -MMD -MP -o $@ -c $<
-	@printf "$(YELLOW). . . COMPILING SO_LONG OBJECTS . . . $(GREY)%-33.33s\r$(DEF_COLOR)" $@
+	@$(CC) $(FLAGS) $(HEADER_INC) -MMD -MP -o $@ -c $<
+	@printf "$(YELLOW). . . compiling $(NAME) objects . . . => $(ITALIC)$(GREY)%-33.33s\r$(RESET)" $@
+
+$(BONUS_NAME): lib mlx $(BONUS_HEADER) $(BONUS_OBJS)
+	@$(CC) $(FLAGS) $(BONUS_HEADER_INC) $(BONUS_OBJS) $(LIB) $(MLX) -o $(BONUS_NAME)
 
 $(BONUS_OBJS_PATH)%.o: $(BONUS_SRCS_PATH)%.c
-	@echo "$(YELLOW)\n. . . COMPILING BONUS SO_LONG. . .$(WHITE)\n"
 	@mkdir -p $(BONUS_OBJS_PATH)
-	@$(CC) $(FLAGS) $(HEADERS_INC) -MMD -MP -o $@ -c $<
-	@printf "$(YELLOW). . . COMPILING BONUS SO_LONG OBJECTS . . . $(GREY)%-33.33s\r$(DEF_COLOR)" $@
+	@$(CC) $(FLAGS) $(BONUS_HEADER_INC) -MMD -MP -o $@ -c $<
+	@printf "$(YELLOW). . . compiling $(BONUS_NAME) objects . . . => $(ITALIC)$(GREY)%-33.33s\r$(RESET)" $@
 
 lib:
 	@$(MAKE) --no-print-directory -C $(LIB_PATH)
-	@echo "$(GREEN)[ ✔ ] LIBFT $(WHITE)"
+	@echo "\n\n$(GREEN)[ ✔ ]\tLIBFT$(RESET)"
 
-bonus:	header lib $(HEADERS) $(BONUS_OBJS)
-	@echo "$(YELLOW)\n. . . COMPILING MINILIBX OBJECTS. . . $(WHITE)\n"
-	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
-	@echo "$(GREEN)[ ✔ ] MINILIBX$(WHITE)"
-	@echo "$(YELLOW). . . COMPILING BONUS SO_LONG. . .$(WHITE)\n"
-	@$(CC) $(FLAGS) $(HEADERS_INC) $(BONUS_OBJS) $(LIB) $(MLX) -o $(NAME)
-	@echo "$(GREEN)[ ✔ ] BONUS SO_LONG $(WHITE)"
+mlx: $(MLX_PATH)
+	@if [ ! -e "$(MLX_PATH)lib$(MLX_NAME).a" ]; then \
+		echo "$(YELLOW)\n. . . compiling Minilibx . . . $(RESET)\n"; \
+		$(MAKE) --no-print-directory -sC $(MLX_PATH); \
+	fi
+	@echo "\n$(GREEN)[ ✔ ]\tMINILIBX$(RESET)"
+
+bonus: header $(BONUS_NAME)
+	@echo "\n$(GREEN)[ ✔ ]\tBONUS SO_LONG$(RESET)\n"
+	@echo "$(BOLD)\n▶ TO LAUNCH:\t./$(BONUS_NAME) map_file.ber\n$(RESET)"
 
 clean:
-	@echo "$(YELLOW)\n. . . CLEANING OBJECTS . . .\n$(DEF_COLOR)"
-	@$(MAKE) --no-print-directory clean -C $(LIB_PATH)
-	@$(MAKE) --no-print-directory clean -sC $(MLX_PATH)
-	@$(RM) $(OBJS) $(BONUS_OBJS)
-	@$(RM) -r $(OBJS_PATH) $(BONUS_OBJS_PATH)
-	@echo "$(GREEN)[ ✔ ] OBJECTS CLEANED$(DEF_COLOR)"
+	@if [ -d "$(OBJS_PATH)" ]; then \
+		echo "$(YELLOW)\n. . . cleaning objects . . .$(RESET)\n"; \
+		$(MAKE) --no-print-directory clean -C $(LIB_PATH); \
+		$(MAKE) --no-print-directory clean -sC $(MLX_PATH); \
+		$(RM) -r $(OBJS_PATH); \
+	fi
+	@echo "\n$(GREEN)[ ✔ ]\tOBJECTS CLEANED$(RESET)"
 
 fclean:	clean
-ifeq ("$(shell test -e $(NAME) && echo $$?)","0")
-	@echo "$(YELLOW)\n. . . CLEANING REST . . .\n$(DEF_COLOR)"
+	@if [ -e $(NAME) ]; then \
+		echo "$(YELLOW)\n. . . cleaning $(NAME) . . .$(RESET)\n"; \
+		$(RM) $(NAME); \
+	fi
+	@if [ -e $(BONUS_NAME) ]; then \
+		echo "$(YELLOW)\n. . . cleaning $(BONUS_NAME) . . .$(RESET)\n"; \
+		$(RM) $(BONUS_NAME); \
+	fi
 	@$(MAKE) --no-print-directory fclean -C $(LIB_PATH)
-	@$(RM) $(NAME)
-	@echo "$(GREEN)[ ✔ ] ALL CLEANED$(DEF_COLOR)"
-else
-	@echo "$(GREEN)[ ✔ ] EXECUTABLES ALREADY CLEANED$(DEF_COLOR)"
-endif
+	@echo "\n$(GREEN)[ ✔ ]\tALL CLEANED$(RESET)"
 
 re:	fclean all
+
+# Include all .d files
+-include $(DEPS) $(DEPS_BONUS)
+
+.PHONY:	all clean fclean re header lib mlx bonus
+
+#------------------------------------------------------------------------------#
+#	CUSTOM RULES															   #
+#------------------------------------------------------------------------------#
+GITHUB_PROF = https://github.com/mariav7
 
 define HEADER_PROJECT
 $(MAGENTA)
@@ -130,148 +168,35 @@ $(MAGENTA)
 .----)   |   |  `--'  |         |  `----.|  `--'  | |  |\   | |  |__| | 
 |_______/     \______/   ______ |_______| \______/  |__| \__|  \______| 
                         |______|                                           
-$(WHITE)
+$(RESET)
 endef
 export HEADER_PROJECT
 
 header:
-		clear
-		@echo "$$HEADER_PROJECT"
+	clear
+	@echo "$$HEADER_PROJECT"
+	@printf "$(BLUE)%20s Coded by:$(BLINK)$(WHITE) \e]8;;$(GITHUB_PROF)\e\\mflores-\e]8;;\e\\ $(RESET)\n\n"
 
-# CUSTOM RULES
-FNCTION		= $(shell ls -l $(LIB_PATH)/srcs | grep ft_ | sed 's/^.*ft_//' | sed 's/..$$//')
-FORBID		= printf $(FNCTION)
-FN1			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
-FN2			= $(addprefix -e $\" ,$(addsuffix $\", $(FORBID)))
-PATH_BADMAPS	= ./maps/bad_maps/
-PATH_MAPS	= ./maps/
-FLAGS_VALGRIND = valgrind --leak-check=full --error-exitcode=3
-TEST = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_BADMAPS)
-TEST2 = $(FLAGS_VALGRIND) ./$(NAME) $(PATH_MAPS)
+# COLORS
+RESET = \033[0m
+WHITE = \033[37m
+GREY = \033[90m
+RED = \033[91m
+DRED = \033[31m
+GREEN = \033[92m
+DGREEN = \033[32m
+YELLOW = \033[93m
+DYELLOW = \033[33m
+BLUE = \033[94m
+DBLUE = \033[34m
+MAGENTA = \033[95m
+DMAGENTA = \033[35m
+CYAN = \033[96m
+DCYAN = \033[36m
 
-check:
-	@grep -qe ${USER} -e ${MAIL} srcs/* includes/* && \
-	echo "$(GREEN)[ ✔ ]$(WHITE)	Username and email" || echo "$(RED)[ ✗ ]$(BLUE)	Username and email"
-	@cat $(SRCS) | grep -q $(FN1) $(FN2) && echo "$(RED)[ ✗ ]$(BLUE)	Forbidden functions" ||\
-	echo "$(GREEN)[ ✔ ]$(WHITE)	Forbidden functions"
-	@ls | grep -q -U $(NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Executable name" ||\
-	echo "$(RED)[ ✗ ]$(BLUE)	Executable name"
-	@$(MAKE) norme | grep -B 1 Error && echo "$(RED)[ ✗ ]$(BLUE)	Norme" || \
-	echo "$(GREEN)[ ✔ ]$(WHITE)	Norme"
-	@ls $(LIB_PATH) | grep -q $(LIB_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Libft" ||\
-	echo "$(RED)[ ✗ ]$(BLUE)	Libft"
-	@ls $(MLX_PATH) | grep -q $(MLX_NAME) && echo "$(GREEN)[ ✔ ]$(WHITE)	Minilibx" ||\
-	echo "$(RED)[ ✗ ]$(BLUE)	Minilibx"
-
-norme:
-	@$(MAKE) --no-print-directory -C $(LIB_PATH) norme
-	norminette $(SRCS_PATH) $(BONUS_SRCS_PATH) ./includes/
-
-test1: header $(NAME)
-	@echo "$(BLUE)TEST: MAP 1$(YELLOW)\n"
-	@cat $(PATH_MAPS)map1.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST2)map1.ber; then \
-        echo "\n$(GREEN)[ ✔ ] TEST MAP 1$(WHITE)\n\n"; \
-	else \
-		echo "\n$(RED)[ ✗ ] TEST MAP 1$(WHITE)\n\n"; \
-    fi
-
-test2: header $(NAME)
-	@echo "$(BLUE)TEST: MAP 2$(YELLOW)\n"
-	@cat $(PATH_MAPS)map2.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST2)map2.ber; then \
-        echo "\n$(GREEN)[ ✔ ] TEST MAP 2$(WHITE)\n\n"; \
-	else \
-		echo "\n$(RED)[ ✗ ] TEST MAP 2$(WHITE)\n\n"; \
-    fi
-
-test3: header $(NAME)
-	@echo "$(BLUE)TEST: MAP 3$(YELLOW)\n"
-	@cat $(PATH_MAPS)map3.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST2)map3.ber; then \
-        echo "\n$(GREEN)[ ✔ ] TEST MAP 3$(WHITE)\n\n"; \
-	else \
-		echo "\n$(RED)[ ✗ ] TEST MAP 3$(WHITE)\n\n"; \
-    fi
-
-errortests: header $(NAME)
-	@echo "\n$(YELLOW)... RUNNING ERROR TESTS ...$(WHITE)\n"
-
-	@echo "$(BLUE)TEST: INVALID FILE TYPE$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)invalid-file.txt
-	@echo "$(WHITE)\n"
-	@if $(TEST)invalid-file.txt; then \
-		echo "\n$(RED)[ ✗ ] TEST INVALID FILE$(WHITE)\n\n"; \
-	else \
-        echo "\n$(GREEN)[ ✔ ] TEST INVALID FILE$(WHITE)\n\n"; \
-    fi
-
-	@echo "$(BLUE)TEST: EMPTY MAP$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)emptymap.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)emptymap.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST EMPTY MAP$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST EMPTY MAP$(WHITE)\n\n"; \
-    fi
-	
-	@echo "$(BLUE)TEST: INVALID CHARACTERS$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)invalid-characters.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)invalid-characters.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST INVALID CHARACTERS$(WHITE)\n\n"; \
-    fi
-
-	@echo "$(BLUE)TEST: MIN. CHARACTERS$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)not-min-characters.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)not-min-characters.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST MIN. CHARACTERS$(WHITE)\n\n"; \
-    fi
-
-	@echo "$(BLUE)TEST: IS NOT RECTANGULAR$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)not-rectangular.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)not-rectangular.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST IS NOT RECTANGULAR$(WHITE)\n\n"; \
-    fi
-
-	@echo "$(BLUE)TEST: IS NOT WALLED$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)not-walled.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)not-walled.ber; then \
-        echo "\n$(RED)[ ✗ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST IS NOT WALLED$(WHITE)\n\n"; \
-    fi
-
-	@echo "$(BLUE)TEST: INVALID PATH$(YELLOW)\n"
-	@cat $(PATH_BADMAPS)invalid-path.ber
-	@echo "$(WHITE)\n"
-	@if $(TEST)invalid-path.ber; then \
-		echo "\n$(RED)[ ✗ ] TEST INVALID PATH$(WHITE)\n\n"; \
-	else \
-		echo "\n$(GREEN)[ ✔ ] TEST INVALID PATH$(WHITE)\n\n"; \
-    fi
-
-.PHONY:	all clean fclean re header lib mlx bonus norme check test1 test2 test3 errortests
-
-#Colors
-DEF_COLOR = \033[0;39m
-GRAY = \033[0;90m
-RED = \033[0;91m
-GREEN = \033[1;92m
-YELLOW = \033[1;93m
-BLUE = \033[0;94m
-MAGENTA = \033[1;95m
-CYAN = \033[0;96m
-WHITE = \033[0;97m
+# FORMAT
+BOLD = \033[1m
+ITALIC = \033[3m
+UNDERLINE = \033[4m
+STRIKETHROUGH = \033[9m
+BLINK	= \033[5m

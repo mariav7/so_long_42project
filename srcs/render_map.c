@@ -6,7 +6,7 @@
 /*   By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:59:48 by mflores-          #+#    #+#             */
-/*   Updated: 2022/11/15 14:16:39 by mflores-         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:09:16 by mflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,23 @@
 
 void	init_game(t_data *d)
 {
+	int	length;
+	int	width;
+
 	reg_images(d);
+	mlx_get_screen_size(d->mlx_ptr, &length, &width);
+	if (d->map->width * SIZE > length || d->map->height * SIZE > width)
+	{
+		free_mlx_images(d);
+		error_exit(d, ERR_MAP6, NULL);
+	}
 	d->window = mlx_new_window(d->mlx_ptr, d->map->width * SIZE,
 			d->map->height * SIZE, TITLE);
 	if (d->window == NULL)
+	{
+		free_mlx_images(d);
 		error_exit(d, ERR_MLX_WIN, NULL);
+	}
 	d->map->current_pos = 'F';
 	put_images(d);
 }
