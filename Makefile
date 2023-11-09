@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2023/11/09 18:29:31 by mflores-         ###   ########.fr        #
+#    Updated: 2023/11/09 19:02:00 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ RM			= rm -f
 HEADER_FILES	= so_long
 HEADER_PATH 	= includes/
 HEADER			= $(addsuffix .h, $(addprefix $(HEADER_PATH), $(HEADER_FILES)))
-HEADER_INC		= $(addprefix -I, $(HEADER_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
+HEADER_INC		= $(addprefix -I, $(HEADER_PATH) $(LIB_HEADER_PATH) /usr/include/$(MLX_HEADER_PATH))
 
 BONUS_HEADER_FILES	= bonus_so_long
 BONUS_HEADER_PATH 	= bonus/includes/
 BONUS_HEADER		= $(addsuffix .h, $(addprefix $(BONUS_HEADER_PATH), $(BONUS_HEADER_FILES)))
-BONUS_HEADER_INC	= $(addprefix -I, $(BONUS_HEADER_PATH) $(LIB_HEADER_PATH) /usr/include$(MLX_HEADER_PATH))
+BONUS_HEADER_INC	= $(addprefix -I, $(BONUS_HEADER_PATH) $(LIB_HEADER_PATH) /usr/include/$(MLX_HEADER_PATH))
 
 #------------------------------------------------------------------------------#
 #	LIBFT																	   #
@@ -45,9 +45,9 @@ LIB_HEADER_PATH = $(LIB_PATH)includes/
 #------------------------------------------------------------------------------#
 MLX_HEADER_FILES	= mlx mlx_init
 MLX_HEADER_PATH		= $(addsuffix .h, $(addprefix $(MLX_PATH), $(MLX_HEADER_FILES)))
-MLX_NAME			= mlx_Linux
+MLX_NAME			= mlx
 MLX_PATH 			= mlx/
-MLX_FLAGS   		= -L/usr/lib -lXext -lX11 -lm -lz -O3
+MLX_FLAGS   		= -lXext -lX11 -lm -lz
 MLX					= -L$(MLX_PATH) -l$(MLX_NAME) $(MLX_FLAGS) 
 
 #------------------------------------------------------------------------------#
@@ -116,8 +116,11 @@ lib:
 	@echo "\n\n$(GREEN)[ ✔ ]\tLIBFT$(RESET)"
 
 mlx: $(MLX_PATH)
-	@echo "$(YELLOW)\n. . . compiling Minilibx . . . $(RESET)\n"
-	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
+	@if [ ! -e "$(MLX_PATH)lib$(MLX_NAME).a" ]; then \
+		echo "$(YELLOW)\n. . . compiling Minilibx . . . $(RESET)\n"; \
+		chmod +rx $(MLX_PATH)configure ; \
+		$(MAKE) --no-print-directory -sC $(MLX_PATH); \
+	fi
 	@echo "\n$(GREEN)[ ✔ ]\tMINILIBX$(RESET)"
 
 bonus: header $(BONUS_NAME)
