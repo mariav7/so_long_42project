@@ -20,9 +20,9 @@ The player’s goal is to collect all collectibles present on the map then be ab
 The project's requirements:
 * Keys to move the main character:
   * `W` to go up or `⬆️`in bonus mode
-  * `A` to go left or `left` in bonus mode
-  * `S` to go down or `down` in bonus mode
-  * `D` to go right or `right` in bonus mode
+  * `A` to go left or `⬅️` in bonus mode
+  * `S` to go down or `⬇️` in bonus mode
+  * `D` to go right or `➡️` in bonus mode
 * To exit game:
   * press the `ESC` button
   * click the `X` on the window
