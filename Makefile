@@ -6,7 +6,7 @@
 #    By: mflores- <mflores-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 16:41:02 by mflores-          #+#    #+#              #
-#    Updated: 2023/11/09 14:32:23 by mflores-         ###   ########.fr        #
+#    Updated: 2023/11/09 18:29:31 by mflores-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,10 +116,8 @@ lib:
 	@echo "\n\n$(GREEN)[ ✔ ]\tLIBFT$(RESET)"
 
 mlx: $(MLX_PATH)
-	@if [ ! -e "$(MLX_PATH)lib$(MLX_NAME).a" ]; then \
-		echo "$(YELLOW)\n. . . compiling Minilibx . . . $(RESET)\n"; \
-		$(MAKE) --no-print-directory -sC $(MLX_PATH); \
-	fi
+	@echo "$(YELLOW)\n. . . compiling Minilibx . . . $(RESET)\n"
+	@$(MAKE) --no-print-directory -sC $(MLX_PATH)
 	@echo "\n$(GREEN)[ ✔ ]\tMINILIBX$(RESET)"
 
 bonus: header $(BONUS_NAME)
