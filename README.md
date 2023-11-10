@@ -11,23 +11,23 @@ Coded with 💗 by: [mflores-](https://github.com/mariav7)
 
 [**Subject PDF**](misc/en.subject.pdf)
 
-The purpose of so_long is to create our own 2D game using the [miniLibX library](https://github.com/42Paris/minilibx-linux).
+The purpose of so_long is to create your own 2D game in [C](https://en.cppreference.com/w/c/language) using the graphic library [miniLibX](https://github.com/42Paris/minilibx-linux).
 
-The player’s goal is to collect all collectibles present on the map then be able to escape.
+The player’s goal is to collect all the collectible items present on the map in order to be able to escape.
 
 ## Supported feautures
 
 The project's requirements:
 * Keys to move the main character:
-  * `W` to go up or `⬆️`in bonus mode
-  * `A` to go left or `⬅️` in bonus mode
-  * `S` to go down or `⬇️` in bonus mode
-  * `D` to go right or `➡️` in bonus mode
-* To exit game:
+  * `W` to go up or `⬆️` (bonus mode)
+  * `A` to go left or `⬅️` (bonus mode)
+  * `S` to go down or `⬇️` (bonus mode)
+  * `D` to go right or `➡️` (bonus mode)
+* To exit the game:
   * press the `ESC` button
   * click the `X` on the window
 * Map files must be (`.ber`) type
-* Valid maps must be composed of the following characters:
+* Valid maps must be composed of the following characters only:
   * `0` for an empty space
   * `1` for walls
   * `P` for the player's starting position
@@ -35,7 +35,7 @@ The project's requirements:
   * `E` for an exit
 * Maps must be closed/surrounded by walls
 * The player must collect all the collectible items in order to escape
-* Display of the current number of movements
+* Display of the current number of movements in the terminal for normal mode and in the game for bonus mode
 
 ---
 
