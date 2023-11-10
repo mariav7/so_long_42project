@@ -15,6 +15,8 @@ The purpose of so_long is to create your own 2D game in [C](https://en.cpprefere
 
 The player’s goal is to collect all the collectible items present on the map in order to be able to escape.
 
+---
+
 ## Supported feautures
 
 The project's requirements:
@@ -41,26 +43,27 @@ The project's requirements:
 
 ## Installation
 
-**Clone repo and compile project:**
+**Clone github repository:**
 ```bash
 git clone git@github.com:mariav7/so_long_42project.git
 cd so_long_42project
 ```
 
-**Compile and run the project in BONUS mode:**
+**Compile and run the program in BONUS mode:**
 ```bash
 make bonus && ./bonus_so_long maps/map1.ber
 ```
 
 OR
 
-**Compile and run the project in NORMAL mode:**
+**Compile and run the program in NORMAL mode:**
 ```bash
 make && ./so_long maps/map1.ber
 ```
 
-**To run script testing the different errors of invalid maps:**
+**To execute the script and test various errors with invalid maps:**
 ```bash
-./map_testing.sh
+chmod -xr map_testing.sh && ./map_testing.sh
 ```
+
 ---
